@@ -14,9 +14,11 @@
     RJBookList* listView;
     UIPageControl* pageControl;
 }
-- (IBAction)changePage:(id)sender;
-- (IBAction)doComment:(id)sender;
-- (IBAction)doList:(id)sender;
-- (void) gotoPage:(int) pageNum;
+
+//yu mark 未使用该功能，所以去除
+//- (IBAction)changePage:(id)sender;
+//- (IBAction)doComment:(id)sender;
+//- (IBAction)doList:(id)sender;
+//- (void) gotoPage:(int) pageNum;
 
 @end

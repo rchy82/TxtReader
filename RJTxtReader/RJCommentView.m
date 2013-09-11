@@ -23,16 +23,23 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        if ([self checkNetworkStatus])
-        {
-            [self downloadxml ];
-        }
+        
+        
+//yu mark  未启用网络功能，暂时去除
+//        if ([self checkNetworkStatus])
+//        {
+//            [self downloadxml ];
+//        }
 
-        [self loadxml];
-        [self loadTableView];
+//yu mark 暂时去除，功能待测试
+//    [self loadTableView];
+        
+          [self loadxml];        
     }
     return self;
 }
+
+
 
 -(BOOL) checkNetworkStatus
 {

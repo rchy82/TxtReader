@@ -27,6 +27,8 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
+    //yu mark 增加隐藏状态栏
+    [application setStatusBarHidden:YES];
     
     [[RJBookData sharedRJBookData] loadXml:@"book.xml"];
 
