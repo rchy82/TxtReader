@@ -50,11 +50,11 @@
    	NSUInteger page = bookSlider.value;
 	pageIndex = page;
 	bookLabel.text = [mBook stringWithPage:pageIndex];
-   // [self showCurrentPage:AllPage];
+    [self showCurrentPage:AllPage];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-   // [self showCurrentPage:AllPage];
+   [self showCurrentPage:AllPage];
     UITouch *touch = [touches anyObject];
     gestureStartPoint = [touch locationInView:self.view];
 }
@@ -293,7 +293,7 @@
         bookLabel.text = string;
         [self exchangeAnimate:1];
         [self savePlace:pageIndex];
-       //[self showCurrentPage:AllPage];
+        [self showCurrentPage:AllPage];
         return ;
     }
  
@@ -308,7 +308,7 @@
         bookLabel.text = string;
         [self exchangeAnimate:0];
         [self savePlace:pageIndex];
-       // [self showCurrentPage:AllPage];
+        [self showCurrentPage:AllPage];
         return ;
     }
 }
