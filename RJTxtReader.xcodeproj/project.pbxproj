@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		04E0943F170028EB00BFE212 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E0943E170028EA00BFE212 /* Default-568h@2x.png */; };
 		04E094431700358200BFE212 /* play-last1.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E094411700358100BFE212 /* play-last1.png */; };
+		87CE782B17E1AA7800480EFF /* ReaderConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 87CE782A17E1AA7700480EFF /* ReaderConstants.m */; };
 		CF022C5615E5E0D4002D34DB /* shelf_row.png in Resources */ = {isa = PBXBuildFile; fileRef = CF022C5515E5E0D4002D34DB /* shelf_row.png */; };
 		CF4BEFB715E5C417009CCA5E /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = CF4BEFB615E5C417009CCA5E /* button.png */; };
 		CF4BEFBB15E5C4FA009CCA5E /* new2.png in Resources */ = {isa = PBXBuildFile; fileRef = CF4BEFB915E5C4FA009CCA5E /* new2.png */; };
@@ -213,6 +214,8 @@
 /* Begin PBXFileReference section */
 		04E0943E170028EA00BFE212 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		04E094411700358100BFE212 /* play-last1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-last1.png"; sourceTree = "<group>"; };
+		87CE782917E1AA7600480EFF /* ReaderConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderConstants.h; sourceTree = "<group>"; };
+		87CE782A17E1AA7700480EFF /* ReaderConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderConstants.m; sourceTree = "<group>"; };
 		CF022C5515E5E0D4002D34DB /* shelf_row.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shelf_row.png; sourceTree = "<group>"; };
 		CF4BEFB615E5C417009CCA5E /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		CF4BEFB915E5C4FA009CCA5E /* new2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new2.png; sourceTree = "<group>"; };
@@ -688,6 +691,8 @@
 				D429CAD915E5480700241771 /* RJBookListViewController.xib */,
 				D4E1EC3E15F5289100196D27 /* RJBookIndexViewController.h */,
 				D4E1EC3F15F5289100196D27 /* RJBookIndexViewController.m */,
+				87CE782917E1AA7600480EFF /* ReaderConstants.h */,
+				87CE782A17E1AA7700480EFF /* ReaderConstants.m */,
 			);
 			path = RJTxtReader;
 			sourceTree = "<group>";
@@ -1252,6 +1257,7 @@
 				CF50244315EB4F370090376A /* KDBooKViewController.m in Sources */,
 				CF50244415EB4F370090376A /* PageView.m in Sources */,
 				D4E1EC4015F5289100196D27 /* RJBookIndexViewController.m in Sources */,
+				87CE782B17E1AA7800480EFF /* ReaderConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

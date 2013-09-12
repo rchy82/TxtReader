@@ -6,6 +6,7 @@
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
+#import "ReaderConstants.h"
 #import "RJBookIndexViewController.h"
 
 @interface RJBookIndexViewController ()
