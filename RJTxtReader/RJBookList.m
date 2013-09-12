@@ -6,6 +6,7 @@
 //
 //
 
+#import "ReaderConstants.h"
 #import "RJBookList.h"
 #import "KDBooKViewController.h"
 
