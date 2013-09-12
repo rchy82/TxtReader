@@ -59,7 +59,7 @@ static RJBookData *shareBookData = nil;
     CXMLDocument *document = [[CXMLDocument alloc] initWithData:XMLData
                                                         options:0
                                                           error:nil
-                              ];
+                                                        ];
     
     CXMLNode* bookData = [document nodeForXPath:@"//books" error:nil];
     for (CXMLElement *element in bookData.children)
@@ -73,13 +73,13 @@ static RJBookData *shareBookData = nil;
                 if([[node name] isEqualToString:@"name"])
                 {
                     singleBook.name = [node stringValue];
-                    NSLog(@"%@",singleBook.name);
+                   // NSLog(@"%@",singleBook.name);
                 }
                 
                 if([[node name] isEqualToString:@"icon"])
                 {
                     singleBook.icon = [node stringValue];
-                    NSLog(@"%@",singleBook.icon);
+                    //NSLog(@"%@",singleBook.icon);
                 }
                 
                 if([[node name] isEqualToString:@"pages"])
@@ -94,14 +94,14 @@ static RJBookData *shareBookData = nil;
                         if ([pageNode isKindOfClass:[CXMLNode class]] && [[pageNode name] isEqualToString:@"page"])
                         {
                             [singleBook.pages addObject:[pageNode stringValue] ];
-                            NSLog(@"%@",[pageNode stringValue] );
+                           // NSLog(@"%@",[pageNode stringValue] );
                             NSString *path = [[NSBundle mainBundle]pathForResource:[pageNode stringValue] ofType:nil] ;
                             NSDictionary *fileAttributes = [fileManager attributesOfItemAtPath:path error:&error];
                             NSUInteger fileSize = 0;
                             if (fileAttributes) {
                                 fileSize = [[fileAttributes objectForKey:NSFileSize] unsignedIntegerValue];
                             }
-                            NSLog(@"%@",[NSString stringWithFormat:@"%d",fileSize]);
+                            //NSLog(@"%@",[NSString stringWithFormat:@"%d",fileSize]);
                             [singleBook.pageSize addObject: [NSString stringWithFormat:@"%d",fileSize]];
                         }
                     }

@@ -38,25 +38,32 @@
     [saveDefaults setInteger:nPage forKey:singleBook.name];
 }
 
+
 - (void)sliderEvent{
-	NSUInteger page = bookSlider.value;
+    
+   	NSUInteger page = bookSlider.value;
 	pageIndex = page;
 	bookLabel.text = [mBook stringWithPage:pageIndex];
+   [self showCurrentPage:AllPage];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self showCurrentPage:AllPage];
     UITouch *touch = [touches anyObject];
     gestureStartPoint = [touch locationInView:self.view];
 }
 
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+   
     UITouch *touch = [touches anyObject];
     CGPoint currentPosition = [touch locationInView:self.view];
     
     CGFloat deltaX = fabsf(gestureStartPoint.x - currentPosition.x);
     CGFloat deltaY = fabsf(gestureStartPoint.y - currentPosition.y);
+  
     if (deltaX < 10 && deltaY < 10) { //单击
+        
         [self ShowHideNav];
         if (isNavHideflage == NO)
         {
@@ -101,8 +108,9 @@
 - (id)init{
 	self = [super init];
 	if (self) {
-		// add code here		
-	}
+     
+        // add code here
+}
 	return self;
 }
 
@@ -194,8 +202,9 @@
     
     UINavigationBar *navBar = self.navigationController.navigationBar;
     navBar.barStyle = UIBarStyleBlackTranslucent;
-    UIView* aView = [navBar.subviews objectAtIndex:0];
+     UIView* aView = [navBar.subviews objectAtIndex:0];
     aView.hidden = NO;
+    
         
     UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] init];
     leftBarButtonItem.title = @"返回";
@@ -254,11 +263,17 @@
 	[slider release];
     
     [self performSelector:@selector(showPage) withObject:self afterDelay:0.25];
+    
+    
+    
 }
+
+
 
 //toolbar的响应事件
 -(void) doPre
 {
+  
     if ( pageIndex > 1) {
         --pageIndex;
         bookSlider.value = pageIndex;
@@ -266,11 +281,14 @@
         bookLabel.text = string;
         [self exchangeAnimate:1];
         [self savePlace:pageIndex];
+       [self showCurrentPage:AllPage];
         return ;
     }
+ 
 }
 -(void) doNext
 {
+  
     if ( pageIndex < bookSlider.maximumValue) {
         ++pageIndex;
         bookSlider.value = pageIndex;
@@ -278,6 +296,7 @@
         bookLabel.text = string;
         [self exchangeAnimate:0];
         [self savePlace:pageIndex];
+        [self showCurrentPage:AllPage];
         return ;
     }
 }
@@ -411,7 +430,21 @@
 - (void)bookDidRead:(NSUInteger)size{
 	bookSlider.maximumValue = size;
 	bookSlider.value = pageIndex;
-}
+  }
+
+- (void)showCurrentPage:(int)maxpage{
+    
+    AllPage=maxpage;
+    currentPage =pageIndex;
+     UILabel *pageShow = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    pageShow.font = [UIFont systemFontOfSize:16];
+    pageShow.textColor = [UIColor whiteColor];
+    pageShow.backgroundColor = [UIColor clearColor];
+    pageShow.textAlignment = UITextAlignmentCenter;
+    pageShow.text = [NSString stringWithFormat:@"%d",currentPage];
+    self.navigationItem.titleView = pageShow;
+    [pageShow release];
+ }
 
 
 @end

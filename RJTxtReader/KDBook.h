@@ -8,6 +8,10 @@
 - (void)firstPage:(NSString *)pageString;
 //遍历完文档后
 - (void)bookDidRead:(NSUInteger)size;
+
+//yu mark 增加显示进入书本显示页码
+-(void)showCurrentPage:(int)mxpage;
+
 @end
 
 
@@ -19,6 +23,7 @@
     NSString  *bookName; //需要把所有文件合并在一起
 	NSMutableArray   *pageIndexArray; //保存每页的下标（文件的偏移量-分页）
 	NSThread  *thread;
+    int allPage; //总页数
 	
 	unsigned long long bookSize;
 	
@@ -35,5 +40,6 @@
 - (unsigned long long)offsetWithPage:(NSUInteger)pageIndex;
 - (id)initWithBook:(NSInteger) newBookIndex;
 - (void) createBook;
+- (void) getAllPage;
 
 @end
