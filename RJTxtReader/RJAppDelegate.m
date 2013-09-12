@@ -10,6 +10,7 @@
 
 #import "RJBookListViewController.h"
 #import "RJBookData.h"
+#import "MobiSageSDK.h"
 
 @implementation RJAppDelegate
 
@@ -35,6 +36,9 @@
     RJBookListViewController *bookListViewController = [[[RJBookListViewController alloc] initWithNibName:@"RJBookListViewController" bundle:nil] autorelease];
     self.navigationController = [[[UINavigationController alloc] initWithRootViewController:bookListViewController] autorelease];
     self.window.rootViewController = self.navigationController;
+    //yu mark 加入广告id
+    [[MobiSageManager getInstance] setPublisherID:@"babe2b3b40c94a27b10c2541907f80dd"];
+   // [[MobiSageManager getInstance] setPublisherID:@"566786fdeb8e46c6bf3d45a30cf3708a"];
     [self.window makeKeyAndVisible];
     return YES;
 }

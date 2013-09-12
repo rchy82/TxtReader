@@ -3,8 +3,14 @@
 #import "KDBooKViewController.h"
 
 
+
 @implementation KDBooKViewController
 @synthesize bookIndex;
+
+
+- (UIViewController *)viewControllerToPresent {
+    return self;
+}
 
 - (void)exchangeAnimate:(NSInteger)add{
 	[UIView beginAnimations:@"animationID" context:nil];
@@ -44,11 +50,11 @@
    	NSUInteger page = bookSlider.value;
 	pageIndex = page;
 	bookLabel.text = [mBook stringWithPage:pageIndex];
-   [self showCurrentPage:AllPage];
+   // [self showCurrentPage:AllPage];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self showCurrentPage:AllPage];
+   // [self showCurrentPage:AllPage];
     UITouch *touch = [touches anyObject];
     gestureStartPoint = [touch locationInView:self.view];
 }
@@ -103,13 +109,13 @@
     [self.navigationController setToolbarHidden:isNavHideflage animated:TRUE];
     [UIView commitAnimations];
     
+
 }
 
 - (id)init{
 	self = [super init];
 	if (self) {
-     
-        // add code here
+
 }
 	return self;
 }
@@ -243,29 +249,35 @@
 	pageIndex = 1;
 	headView = nil;
 		
-	bookLabel = [[PageView alloc] initWithFrame:CGRectMake(0, -20, 320, myHight-20)];
+	bookLabel = [[PageView alloc] initWithFrame:CGRectMake(0, -20, 320, myHight+20)];//yu mark 全屏显示
 	[self.view addSubview:bookLabel];
     
 	mBook = [[KDBook alloc]initWithBook:bookIndex];
     mBook.delegate = self;
-	mBook.pageSize = CGSizeMake(bookLabel.frame.size.width-20, bookLabel.frame.size.height-20);//bookLabel.frame.size;
+	mBook.pageSize = CGSizeMake(bookLabel.frame.size.width-20, bookLabel.frame.size.height-60);//bookLabel.frame.size;
 	mBook.textFont = [UIFont systemFontOfSize:18];//bookLabel.font;
 
 	
-	UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(10, myHight-30, 300, 20)];//yu mark 更改滑动条，使其居中
-	slider.maximumValue = 300;
-	slider.minimumValue = 1;
-	slider.value = 1;
-	slider.alpha = 0.4;
-	[slider addTarget:self action:@selector(sliderEvent) forControlEvents:UIControlEventValueChanged];
-	bookSlider = [slider retain];
-	[self.view addSubview:slider];
-	[slider release];
+    
+    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(10, myHight-28, 300, 20)];//yu mark 更改滑动条，使其居中
+    slider.maximumValue = 300;
+    slider.minimumValue = 1;
+    slider.value = 1;
+    slider.alpha = 0.8;
+    [slider addTarget:self action:@selector(sliderEvent) forControlEvents:UIControlEventValueChanged];
+    bookSlider = [slider retain];
+    [self.view addSubview:slider];
+    [slider release];
     
     [self performSelector:@selector(showPage) withObject:self afterDelay:0.25];
     
-    
-    
+    MobiSageAdBanner * adBanner = [[MobiSageAdBanner alloc] initWithAdSize:Ad_320X50 withDelegate:self];
+    //设置广告轮显方式
+    [adBanner setSwitchAnimeType:Random];
+    adBanner.frame = CGRectMake(0, myHight-50, 320, 50);
+    [self.view addSubview:adBanner];
+    [adBanner release];
+    // add code here
 }
 
 
@@ -281,7 +293,7 @@
         bookLabel.text = string;
         [self exchangeAnimate:1];
         [self savePlace:pageIndex];
-       [self showCurrentPage:AllPage];
+       //[self showCurrentPage:AllPage];
         return ;
     }
  
@@ -296,7 +308,7 @@
         bookLabel.text = string;
         [self exchangeAnimate:0];
         [self savePlace:pageIndex];
-        [self showCurrentPage:AllPage];
+       // [self showCurrentPage:AllPage];
         return ;
     }
 }
@@ -441,7 +453,7 @@
     pageShow.textColor = [UIColor whiteColor];
     pageShow.backgroundColor = [UIColor clearColor];
     pageShow.textAlignment = UITextAlignmentCenter;
-    pageShow.text = [NSString stringWithFormat:@"%d",currentPage];
+    pageShow.text = [NSString stringWithFormat:@"第%d页",currentPage];
     self.navigationItem.titleView = pageShow;
     [pageShow release];
  }

@@ -3,6 +3,8 @@
 #import "PageView.h"
 #import "RJBookData.h"
 #import "RJBookIndexViewController.h"
+#import "MobiSageSDK.h"
+
 
 @protocol KDBooKViewDelegate 
 
@@ -10,7 +12,7 @@
 
 @end
 
-@interface KDBooKViewController : UIViewController <KDBookDelegate,BookReadDelegate>{
+@interface KDBooKViewController : UIViewController <KDBookDelegate,BookReadDelegate,MobiSageAdBannerDelegate>{
 	
 	PageView  *bookLabel;	
     

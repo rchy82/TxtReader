@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		04E0943F170028EB00BFE212 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E0943E170028EA00BFE212 /* Default-568h@2x.png */; };
 		04E094431700358200BFE212 /* play-last1.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E094411700358100BFE212 /* play-last1.png */; };
+		7EB64D3317E1D8C300E7A71C /* libMobiSageSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB64D3217E1D8C300E7A71C /* libMobiSageSDK.a */; };
+		7EB64D3717E1D8E800E7A71C /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB64D3617E1D8E800E7A71C /* JSONKit.m */; };
+		7EB64D3C17E1D99000E7A71C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB64D3B17E1D99000E7A71C /* QuartzCore.framework */; };
+		7EB64D3E17E1D9A900E7A71C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB64D3D17E1D9A900E7A71C /* CoreLocation.framework */; };
+		7EB64D4017E1D9B200E7A71C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB64D3F17E1D9B200E7A71C /* CoreTelephony.framework */; };
+		7EB64D4217E1D9BF00E7A71C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB64D4117E1D9BF00E7A71C /* MessageUI.framework */; };
+		7EB64D4417E1D9D400E7A71C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB64D4317E1D9D400E7A71C /* AdSupport.framework */; };
+		7EB64D4617E1D9DD00E7A71C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB64D4517E1D9DD00E7A71C /* StoreKit.framework */; };
+		7EB64D4817E1DA0100E7A71C /* libMobiSageRecommend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB64D4717E1DA0100E7A71C /* libMobiSageRecommend.a */; };
 		CF022C5615E5E0D4002D34DB /* shelf_row.png in Resources */ = {isa = PBXBuildFile; fileRef = CF022C5515E5E0D4002D34DB /* shelf_row.png */; };
 		CF4BEFB715E5C417009CCA5E /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = CF4BEFB615E5C417009CCA5E /* button.png */; };
 		CF4BEFBB15E5C4FA009CCA5E /* new2.png in Resources */ = {isa = PBXBuildFile; fileRef = CF4BEFB915E5C4FA009CCA5E /* new2.png */; };
@@ -213,6 +222,18 @@
 /* Begin PBXFileReference section */
 		04E0943E170028EA00BFE212 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		04E094411700358100BFE212 /* play-last1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-last1.png"; sourceTree = "<group>"; };
+		7EB64D3217E1D8C300E7A71C /* libMobiSageSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMobiSageSDK.a; path = MobiSageSDK/libMobiSageSDK.a; sourceTree = "<group>"; };
+		7EB64D3417E1D8CB00E7A71C /* MobiSageSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MobiSageSDK.h; path = MobiSageSDK/MobiSageSDK.h; sourceTree = "<group>"; };
+		7EB64D3517E1D8DB00E7A71C /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = MobiSageSDK/JSONKit.h; sourceTree = "<group>"; };
+		7EB64D3617E1D8E800E7A71C /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = MobiSageSDK/JSONKit.m; sourceTree = "<group>"; };
+		7EB64D3B17E1D99000E7A71C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		7EB64D3D17E1D9A900E7A71C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7EB64D3F17E1D9B200E7A71C /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		7EB64D4117E1D9BF00E7A71C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		7EB64D4317E1D9D400E7A71C /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		7EB64D4517E1D9DD00E7A71C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		7EB64D4717E1DA0100E7A71C /* libMobiSageRecommend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMobiSageRecommend.a; path = MobiSageSDK/libMobiSageRecommend.a; sourceTree = "<group>"; };
+		7EB64D4917E1DC0700E7A71C /* RJTxtReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = RJTxtReader.entitlements; sourceTree = "<group>"; };
 		CF022C5515E5E0D4002D34DB /* shelf_row.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shelf_row.png; sourceTree = "<group>"; };
 		CF4BEFB615E5C417009CCA5E /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		CF4BEFB915E5C4FA009CCA5E /* new2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new2.png; sourceTree = "<group>"; };
@@ -300,7 +321,6 @@
 		CFAA7D4115E759FA004B0889 /* SDImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDImageCache.m; sourceTree = "<group>"; };
 		CFAA7D4215E759FA004B0889 /* SDImageCacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCacheDelegate.h; sourceTree = "<group>"; };
 		CFAA7D4315E759FA004B0889 /* SDWebImageCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageCompat.h; sourceTree = "<group>"; };
-		CFAA7D4415E759FA004B0889 /* SDWebImageCompat副本.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDWebImageCompat副本.h"; sourceTree = "<group>"; };
 		CFAA7D4515E759FA004B0889 /* SDWebImageDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDecoder.h; sourceTree = "<group>"; };
 		CFAA7D4615E759FA004B0889 /* SDWebImageDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDecoder.m; sourceTree = "<group>"; };
 		CFAA7D4715E759FA004B0889 /* SDWebImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDownloader.h; sourceTree = "<group>"; };
@@ -486,21 +506,40 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EB64D4817E1DA0100E7A71C /* libMobiSageRecommend.a in Frameworks */,
+				7EB64D4617E1D9DD00E7A71C /* StoreKit.framework in Frameworks */,
+				7EB64D4417E1D9D400E7A71C /* AdSupport.framework in Frameworks */,
+				7EB64D4217E1D9BF00E7A71C /* MessageUI.framework in Frameworks */,
+				7EB64D4017E1D9B200E7A71C /* CoreTelephony.framework in Frameworks */,
+				7EB64D3E17E1D9A900E7A71C /* CoreLocation.framework in Frameworks */,
+				7EB64D3C17E1D99000E7A71C /* QuartzCore.framework in Frameworks */,
+				D429C99815E53D7900241771 /* CoreGraphics.framework in Frameworks */,
+				D429C99415E53D7900241771 /* UIKit.framework in Frameworks */,
+				D429C99615E53D7900241771 /* Foundation.framework in Frameworks */,
 				CFAA7D6D15E75CB0004B0889 /* MapKit.framework in Frameworks */,
 				CFAA7D6B15E75C83004B0889 /* ImageIO.framework in Frameworks */,
 				CFAA7D3715E72ECB004B0889 /* libz.1.2.5.dylib in Frameworks */,
 				CFAA7D3515E72E40004B0889 /* MobileCoreServices.framework in Frameworks */,
 				CFAA7D3315E72E38004B0889 /* CFNetwork.framework in Frameworks */,
 				CFAA7D3115E72E31004B0889 /* SystemConfiguration.framework in Frameworks */,
-				D429C99415E53D7900241771 /* UIKit.framework in Frameworks */,
-				D429C99615E53D7900241771 /* Foundation.framework in Frameworks */,
-				D429C99815E53D7900241771 /* CoreGraphics.framework in Frameworks */,
+				7EB64D3317E1D8C300E7A71C /* libMobiSageSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7EB64D3117E1D87400E7A71C /* mobiSage_iOS_SDK */ = {
+			isa = PBXGroup;
+			children = (
+				7EB64D3617E1D8E800E7A71C /* JSONKit.m */,
+				7EB64D3517E1D8DB00E7A71C /* JSONKit.h */,
+				7EB64D3417E1D8CB00E7A71C /* MobiSageSDK.h */,
+				7EB64D3217E1D8C300E7A71C /* libMobiSageSDK.a */,
+			);
+			name = mobiSage_iOS_SDK;
+			sourceTree = "<group>";
+		};
 		CF4BEFBD15E5C578009CCA5E /* bookListClass */ = {
 			isa = PBXGroup;
 			children = (
@@ -610,7 +649,6 @@
 				CFAA7D4115E759FA004B0889 /* SDImageCache.m */,
 				CFAA7D4215E759FA004B0889 /* SDImageCacheDelegate.h */,
 				CFAA7D4315E759FA004B0889 /* SDWebImageCompat.h */,
-				CFAA7D4415E759FA004B0889 /* SDWebImageCompat副本.h */,
 				CFAA7D4515E759FA004B0889 /* SDWebImageDecoder.h */,
 				CFAA7D4615E759FA004B0889 /* SDWebImageDecoder.m */,
 				CFAA7D4715E759FA004B0889 /* SDWebImageDownloader.h */,
@@ -632,9 +670,8 @@
 		D429C98415E53D7900241771 = {
 			isa = PBXGroup;
 			children = (
+				7EB64D3117E1D87400E7A71C /* mobiSage_iOS_SDK */,
 				04E0943E170028EA00BFE212 /* Default-568h@2x.png */,
-				CFAA7D6C15E75CB0004B0889 /* MapKit.framework */,
-				CFAA7D6A15E75C83004B0889 /* ImageIO.framework */,
 				CFAA7D3D15E759FA004B0889 /* SDWebImage */,
 				CFAA7D2C15E72016004B0889 /* Reachability */,
 				CFAA7CB315E7200C004B0889 /* ASIHttp */,
@@ -658,6 +695,15 @@
 		D429C99215E53D7900241771 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7EB64D4717E1DA0100E7A71C /* libMobiSageRecommend.a */,
+				7EB64D4517E1D9DD00E7A71C /* StoreKit.framework */,
+				7EB64D4317E1D9D400E7A71C /* AdSupport.framework */,
+				7EB64D4117E1D9BF00E7A71C /* MessageUI.framework */,
+				7EB64D3F17E1D9B200E7A71C /* CoreTelephony.framework */,
+				7EB64D3D17E1D9A900E7A71C /* CoreLocation.framework */,
+				7EB64D3B17E1D99000E7A71C /* QuartzCore.framework */,
+				CFAA7D6C15E75CB0004B0889 /* MapKit.framework */,
+				CFAA7D6A15E75C83004B0889 /* ImageIO.framework */,
 				CFAA7D3615E72ECB004B0889 /* libz.1.2.5.dylib */,
 				CFAA7D3415E72E40004B0889 /* MobileCoreServices.framework */,
 				CFAA7D3215E72E38004B0889 /* CFNetwork.framework */,
@@ -672,6 +718,7 @@
 		D429C99915E53D7900241771 /* RJTxtReader */ = {
 			isa = PBXGroup;
 			children = (
+				7EB64D4917E1DC0700E7A71C /* RJTxtReader.entitlements */,
 				CF50243C15EB4F370090376A /* KDBook.h */,
 				CF50243D15EB4F370090376A /* KDBook.m */,
 				CF50243E15EB4F370090376A /* KDBooKViewController.h */,
@@ -1252,6 +1299,7 @@
 				CF50244315EB4F370090376A /* KDBooKViewController.m in Sources */,
 				CF50244415EB4F370090376A /* PageView.m in Sources */,
 				D4E1EC4015F5289100196D27 /* RJBookIndexViewController.m in Sources */,
+				7EB64D3717E1D8E800E7A71C /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1319,6 +1367,10 @@
 				GCC_PREFIX_HEADER = "RJTxtReader/RJTxtReader-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "RJTxtReader/RJTxtReader-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MobiSageSDK\"",
+				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1332,6 +1384,10 @@
 				GCC_PREFIX_HEADER = "RJTxtReader/RJTxtReader-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "RJTxtReader/RJTxtReader-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MobiSageSDK\"",
+				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
