@@ -83,6 +83,8 @@
 }
 
 - (void)showFirstPage{
+    
+   
 	if (delegate && [(NSObject *)delegate respondsToSelector:@selector(firstPage:)]) {
         RJSingleBook* singleBook = [[RJBookData sharedRJBookData].books objectAtIndex:bookIndex];
 //        NSString* bookName = singleBook.bookFile;
@@ -99,6 +101,13 @@
 	if (delegate && [(NSObject *)delegate respondsToSelector:@selector(bookDidRead:)]) {
 		[delegate bookDidRead:size];
 	}
+}
+
+- (void)showCurrentPage:(int)maxpage{
+	if (delegate && [(NSObject *)delegate respondsToSelector:@selector(showCurrentPage:)]) {
+		[delegate showCurrentPage:maxpage];
+	}
+    
 }
 
 - (unsigned long long)indexOfPage:(NSFileHandle *)handle textFont:(UIFont *)font{
@@ -196,24 +205,30 @@
 }
 
 -(void)bookIndexx{
+  
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc]init];
     RJSingleBook* singleBook = [[RJBookData sharedRJBookData].books objectAtIndex:bookIndex];
 //    NSString* bookName = singleBook.bookFile;
 	NSFileHandle *handle = [self handleWithFile:singleBook.bookFile];
 	NSUInteger count = [pageIndexArray count];
-	unsigned long long index = [[pageIndexArray objectAtIndex:count-1] unsignedLongLongValue];	
+    
+	unsigned long long index = [[pageIndexArray objectAtIndex:count-1] unsignedLongLongValue];
+    
 	while (index < bookSize) {
 		[handle seekToFileOffset:index];
 		index = [self indexOfPage:handle textFont:textFont];
 		[pageIndexArray addObject:[NSNumber numberWithUnsignedLongLong:index]];
-		//NSLog(@"--index:%d",index);
-	}
+		//NSLog(@"--index:%lld",index);
+  }
+    //yu mark 未通过测试，暂时去除
+   // [self getAllPage];
 	[self bookDidRead:[pageIndexArray count]];
 	[pool release];
 }
 
 
 - (void)pageAr{
+ 
 	if (bookIndex < 0) {
 		return ;
 	}
@@ -228,13 +243,14 @@
 		[pageIndexArray addObject:[NSNumber numberWithUnsignedLongLong:index]];
 		[handle seekToFileOffset:index];		
 	}
+    
 	[self showFirstPage];
 	
 	//NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	thread = [[NSThread alloc]initWithTarget:self selector:@selector(bookIndexx) object:nil];
 	[thread start];
 	//[pool release];
-	//[NSThread detachNewThreadSelector:@selector(bookIndex) toTarget:self withObject:nil];	
+	//[NSThread detachNewThreadSelector:@selector(bookIndex) toTarget:self withObject:nil];
 }
 
 #pragma mark NSObject FUNCTION
@@ -248,13 +264,15 @@
 		bookIndex = -1;
         bookPageIndex = 0;
 		textFont = [[UIFont systemFontOfSize:16] retain];
-	    pageSize = CGSizeMake(320, 460);		
+	    pageSize = CGSizeMake(320, 460);
+        
 	}
 	return self;
 }
 
 - (id)initWithBook:(NSInteger)newBookIndex{
 	self = [self init];
+  
 	if (self) {
 		bookIndex = newBookIndex;
 		[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(pageAr) userInfo:nil repeats:NO];
@@ -267,6 +285,13 @@
 {
     
 }
+
+//yu mark 获取页码总数有问题，未通过测试，暂时去除
+//-(void)getAllPage{
+//    allPage=[pageIndexArray count];
+//    [self showCurrentPage:allPage];
+//    NSLog(@"--------------------%d",allPage);
+//}
 
 - (void)dealloc{
 	[thread release];

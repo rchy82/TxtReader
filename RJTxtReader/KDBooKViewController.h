@@ -4,6 +4,12 @@
 #import "RJBookData.h"
 #import "RJBookIndexViewController.h"
 
+@protocol KDBooKViewDelegate 
+
+-(void)getAllPage;
+
+@end
+
 @interface KDBooKViewController : UIViewController <KDBookDelegate,BookReadDelegate>{
 	
 	PageView  *bookLabel;	
@@ -20,6 +26,9 @@
     CGFloat currentLight;
     
     BOOL isShowIndex;
+    
+    int currentPage;
+    int AllPage;
 }
 
 @property (nonatomic, readwrite)NSUInteger bookIndex;
@@ -37,5 +46,6 @@
 -(void) doColor;
 -(void) doNext;
 -(void) doIndex;
+-(void)showCurrentPage:(int)maxpage;
 
 @end

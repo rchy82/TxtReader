@@ -60,14 +60,25 @@
     if (bookData.books.count%3 != 0) {
         num2 +=1;;
     }
+    
+    
     if([bookData.books count]>9)
     {
         FirstView.contentSize = CGSizeMake(320, 145*num2);
-        rect = CGRectMake(0, 138*3, 320, 145);
+        
+         rect = CGRectMake(0, 138*3, 320, 145);
         UIImageView * row4 = [[UIImageView alloc] initWithFrame:rect];
         row4.image = rowImage;
         [FirstView addSubview:row4];
         [row4 release];
+        
+        rect = CGRectMake(0, 138*4, 320, 145);
+        UIImageView * row5 = [[UIImageView alloc] initWithFrame:rect];
+        row5.image = rowImage;
+        [FirstView addSubview:row5];
+        [row5 release];
+    
+        
     }
     
     [self addSubview:FirstView];
