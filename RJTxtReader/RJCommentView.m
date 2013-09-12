@@ -6,6 +6,7 @@
 //
 //
 
+#import "ReaderConstants.h"
 #import "RJCommentView.h"
 #import "TouchXML.h"
 #import "ASIHTTPRequest.h"

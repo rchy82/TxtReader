@@ -6,6 +6,7 @@
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
+#import "ReaderConstants.h"
 #import "RJBookListViewController.h"
 
 
@@ -104,70 +105,70 @@
 
 
 
-//yu mark 以下代码为主界面其他功能，暂时无功能需求去掉
+//yu mark 以下代码为主界面其他功能，暂时无功能需求去掉 -> ahming 代码空间占用不大，保留不调用即可，方便后续修改
 
-//- (void)scrollViewDidScroll:(UIScrollView *)sender {
-//    int page = listView.contentOffset.x / 320;//通过滚动的偏移量来判断目前页面所对应的小白点
-//    pageControl.currentPage = page;//pagecontroll响应值的变化
-//    
-//    UIButton* rightButton = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
-//    
-//    if(listView.contentOffset.x > 160)
-//    {
-//        [rightButton setTitle:@"返回" forState:UIControlStateNormal];
-//        ((UILabel*)self.navigationItem.titleView).text = @"推荐";
-//    }
-//    else
-//    {
-//        [rightButton setTitle:@"推荐" forState:UIControlStateNormal];
-//        ((UILabel*)self.navigationItem.titleView).text = @"书架";
-//    }
-//}
-//
-//- (IBAction)doList:(id)sender
-//{
-//    if(listView.contentOffset.x > 0)
-//    {
-//        [self gotoPage:0];
-//    }
-//    [listView doTableViewShowOrHide];
-//    UILabel* titlView = (UILabel*)self.navigationItem.titleView;
-//    UIButton* leftButton = (UIButton*)self.navigationItem.leftBarButtonItem.customView;
-//    if([leftButton.titleLabel.text isEqualToString: @"书架"])
-//    {
-//        titlView.text = @"书架";
-//        [leftButton setTitle:@"列表" forState:UIControlStateNormal];
-//    }
-//    else
-//    {
-//        titlView.text = @"列表";
-//        [leftButton setTitle:@"书架" forState:UIControlStateNormal];
-//    }
-//}
-//
-//- (IBAction)changePage:(id)sender {
-//    int page = pageControl.currentPage;//获取当前pagecontroll的值
-//    [self gotoPage:page];
-//}
-//
-//- (IBAction)doComment:(id)sender
-//{
-//    if(listView.contentOffset.x /320 == 0)
-//        [self gotoPage:1];
-//    else
-//        [self gotoPage:0];
-//}
-//
-//- (void) gotoPage:(int) pageNum
-//{
-//    [UIView beginAnimations:nil context:nil];
-//    [UIView setAnimationDuration:0.7];
-//    [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.view cache:YES];
-//    [listView setContentOffset:CGPointMake(320 * pageNum, 0)];
-//    [UIView commitAnimations];
-//    
-//}
-//
+- (void)scrollViewDidScroll:(UIScrollView *)sender {
+    int page = listView.contentOffset.x / 320;//通过滚动的偏移量来判断目前页面所对应的小白点
+    pageControl.currentPage = page;//pagecontroll响应值的变化
+    
+    UIButton* rightButton = (UIButton*)self.navigationItem.rightBarButtonItem.customView;
+    
+    if(listView.contentOffset.x > 160)
+    {
+        [rightButton setTitle:@"返回" forState:UIControlStateNormal];
+        ((UILabel*)self.navigationItem.titleView).text = @"推荐";
+    }
+    else
+    {
+        [rightButton setTitle:@"推荐" forState:UIControlStateNormal];
+        ((UILabel*)self.navigationItem.titleView).text = @"书架";
+    }
+}
+
+- (IBAction)doList:(id)sender
+{
+    if(listView.contentOffset.x > 0)
+    {
+        [self gotoPage:0];
+    }
+    [listView doTableViewShowOrHide];
+    UILabel* titlView = (UILabel*)self.navigationItem.titleView;
+    UIButton* leftButton = (UIButton*)self.navigationItem.leftBarButtonItem.customView;
+    if([leftButton.titleLabel.text isEqualToString: @"书架"])
+    {
+        titlView.text = @"书架";
+        [leftButton setTitle:@"列表" forState:UIControlStateNormal];
+    }
+    else
+    {
+        titlView.text = @"列表";
+        [leftButton setTitle:@"书架" forState:UIControlStateNormal];
+    }
+}
+
+- (IBAction)changePage:(id)sender {
+    int page = pageControl.currentPage;//获取当前pagecontroll的值
+    [self gotoPage:page];
+}
+
+- (IBAction)doComment:(id)sender
+{
+    if(listView.contentOffset.x /320 == 0)
+        [self gotoPage:1];
+    else
+        [self gotoPage:0];
+}
+
+- (void) gotoPage:(int) pageNum
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.7];
+    [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.view cache:YES];
+    [listView setContentOffset:CGPointMake(320 * pageNum, 0)];
+    [UIView commitAnimations];
+    
+}
+
 
 - (void)viewDidUnload
 {

@@ -1,5 +1,6 @@
 
 
+#import "ReaderConstants.h"
 #import "KDBooKViewController.h"
 
 
@@ -252,7 +253,7 @@
 	mBook.textFont = [UIFont systemFontOfSize:18];//bookLabel.font;
 
 	
-	UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(10, myHight-30, 300, 20)];//yu mark 更改滑动条，使其居中
+	UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(10, myHight-30, 300, 20)];//yu mark 更改滑动条，使其居中 -40
 	slider.maximumValue = 300;
 	slider.minimumValue = 1;
 	slider.value = 1;

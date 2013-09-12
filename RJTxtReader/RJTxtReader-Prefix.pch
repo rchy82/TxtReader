@@ -12,6 +12,6 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 
-//跟是图的高度
-#define myHight [UIScreen mainScreen].bounds.size.height
+//跟是图的高度 -> ahming 去除以避免前面的 iOS-SDK 环境依赖, 移到 ReaderConstants.h
+// #define myHight [UIScreen mainScreen].bounds.size.height
 #endif
