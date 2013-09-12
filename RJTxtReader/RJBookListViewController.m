@@ -80,13 +80,14 @@
     
     
     
-    rect = CGRectMake(0, 0, self.view.bounds.size.width, myHight-20);
+    rect = CGRectMake(0, 0, self.view.bounds.size.width, myHight);
     self.view.frame = rect;
     listView = [[RJBookList alloc]initWithFrame:rect];
     listView.contentSize = CGSizeMake(self.view.bounds.size.width*2, myHight-20);
     listView.pagingEnabled = YES;
     listView.scrollEnabled = NO;//yu mark 禁止左右滑动
     listView.delegate = self;
+    listView.backgroundColor =[UIColor blackColor];
     listView.nc = self.navigationController;
     [self.view addSubview:listView];
     [listView release];
