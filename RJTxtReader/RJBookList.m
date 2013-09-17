@@ -100,14 +100,14 @@
     }
     
     imageView = [[UIImageView alloc] initWithImage:
-                 [UIImage imageNamed:@"shelf_top.png"]]; // ahming background.jpg 与书架一样的顶部背景
+                 [UIImage imageNamed:@"shelf_top.png"]]; // background.jpg ahming 与书架一样的顶部背景
     rect = CGRectMake(320, 0, 320, 45);
     imageView.frame =rect;
     [self addSubview:imageView];
     [imageView release];
     
     rect = CGRectMake(320, 45, 320, myHight-45);
-    SecondView = [[RJCommentView alloc]initWithFrame:rect];
+    SecondView = [[RJAboutView alloc]initWithFrame:rect]; // RJCommentView ahming 推荐页改为关于或帮助,设置等
     [self addSubview:SecondView];
 
 }

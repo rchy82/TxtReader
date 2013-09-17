@@ -11,6 +11,7 @@
 		04E094431700358200BFE212 /* play-last1.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E094411700358100BFE212 /* play-last1.png */; };
 		8724B18617E810E2001C9734 /* dojump.png in Resources */ = {isa = PBXBuildFile; fileRef = 8724B18417E810E0001C9734 /* dojump.png */; };
 		8724B18717E810E2001C9734 /* dojump@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8724B18517E810E1001C9734 /* dojump@2x.png */; };
+		8724B19617E83786001C9734 /* RJAboutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8724B19517E83785001C9734 /* RJAboutView.m */; };
 		87CE782B17E1AA7800480EFF /* ReaderConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 87CE782A17E1AA7700480EFF /* ReaderConstants.m */; };
 		CF022C5615E5E0D4002D34DB /* shelf_row.png in Resources */ = {isa = PBXBuildFile; fileRef = CF022C5515E5E0D4002D34DB /* shelf_row.png */; };
 		CF4BEFB715E5C417009CCA5E /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = CF4BEFB615E5C417009CCA5E /* button.png */; };
@@ -218,6 +219,8 @@
 		04E094411700358100BFE212 /* play-last1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-last1.png"; sourceTree = "<group>"; };
 		8724B18417E810E0001C9734 /* dojump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dojump.png; sourceTree = "<group>"; };
 		8724B18517E810E1001C9734 /* dojump@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dojump@2x.png"; sourceTree = "<group>"; };
+		8724B19417E83785001C9734 /* RJAboutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJAboutView.h; sourceTree = "<group>"; };
+		8724B19517E83785001C9734 /* RJAboutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJAboutView.m; sourceTree = "<group>"; };
 		87CE782917E1AA7600480EFF /* ReaderConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderConstants.h; sourceTree = "<group>"; };
 		87CE782A17E1AA7700480EFF /* ReaderConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderConstants.m; sourceTree = "<group>"; };
 		CF022C5515E5E0D4002D34DB /* shelf_row.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shelf_row.png; sourceTree = "<group>"; };
@@ -515,6 +518,8 @@
 				CF4BEFBF15E5C5BB009CCA5E /* RJBookList.m */,
 				CF4BEFC115E5C60A009CCA5E /* RJCommentView.h */,
 				CF4BEFC215E5C60A009CCA5E /* RJCommentView.m */,
+				8724B19417E83785001C9734 /* RJAboutView.h */,
+				8724B19517E83785001C9734 /* RJAboutView.m */,
 			);
 			name = bookListClass;
 			sourceTree = "<group>";
@@ -1266,6 +1271,7 @@
 				CF50244415EB4F370090376A /* PageView.m in Sources */,
 				D4E1EC4015F5289100196D27 /* RJBookIndexViewController.m in Sources */,
 				87CE782B17E1AA7800480EFF /* ReaderConstants.m in Sources */,
+				8724B19617E83786001C9734 /* RJAboutView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

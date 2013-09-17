@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "RJCommentView.h"
 #import "RJBookData.h"
-
+#import "RJAboutView.h"
 
 @interface RJBookList : UIScrollView <UITableViewDelegate,UITableViewDataSource>
 
 {
     UIScrollView* FirstView;
-    RJCommentView* SecondView;
+    RJAboutView* SecondView; // RJCommentView ahming 推荐页改为关于或帮助,设置等
     RJBookData* bookData;
     UITableView* bookTableView;
     BOOL isTableViewShow;
