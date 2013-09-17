@@ -18,6 +18,11 @@
 	NSUInteger bookIndex;
 	UISlider *bookSlider;
 	UIView   *headView;
+    
+    UIView *jumpToView; // 跳转控制条, 包含bookSlider
+    UIButton *okJumpButton;
+    UIButton *cancelJumpButton;
+    int pageIndexBeforeJump; // 需要保存跳转前的值, 因为其他currentPage pageIndex无法保存
 	
 	NSUInteger  pageIndex;
     BOOL isNavHideflage;
@@ -41,11 +46,17 @@
 -(void) showPage;
 
 //toolbar的响应事件
+-(void) doJumpTo; // 跳转
+-(void) okJumpButtonAction:(id) sender;
+-(void) cancelJumpButtonAction:(id) sender;
+
 -(void) doPre;
 -(void) doFont;
 -(void) doColor;
 -(void) doNext;
 -(void) doIndex;
 -(void)showCurrentPage:(int)maxpage;
+
+-(void) showHideJumpView;
 
 @end

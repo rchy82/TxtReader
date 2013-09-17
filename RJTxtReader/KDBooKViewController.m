@@ -34,6 +34,8 @@
 
 -(void) savePlace:(NSUInteger) nPage
 {
+    pageIndexBeforeJump = nPage;
+    
     NSUserDefaults *saveDefaults = [NSUserDefaults standardUserDefaults];
     RJSingleBook* singleBook = [[RJBookData sharedRJBookData].books objectAtIndex:bookIndex];
     [saveDefaults setInteger:nPage forKey:singleBook.name];
@@ -66,6 +68,11 @@
     if (deltaX < 10 && deltaY < 10) { //单击
         
         [self ShowHideNav];
+        
+        // 单击时当作确认跳转
+        [self savePlace:bookSlider.value];
+        [jumpToView setHidden:YES];
+        
         if (isNavHideflage == NO)
         {
             [self performSelector:@selector(HideNav) withObject:self afterDelay:10.0];
@@ -223,7 +230,11 @@
     toolBar.barStyle = UIBarStyleBlackTranslucent;
     
     //为toolbar增加按钮
-    UIBarButtonItem *one = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"play-last1.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doPre)];  
+//    UIBarButtonItem *one = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"play-last1.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doPre)];
+    // ahming 滑动条点击跳转时显示到中间
+    UIBarButtonItem *one = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"dojump.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doJumpTo)];
+
+    
     UIBarButtonItem *two = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"color.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doFont)];    
     UIBarButtonItem *three = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"light.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doColor)];
     UIBarButtonItem *four = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"play-next.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doNext)];
@@ -242,6 +253,7 @@
 	self.view.backgroundColor = [UIColor clearColor];
 	
 	pageIndex = 1;
+    pageIndexBeforeJump =1;
 	headView = nil;
 		
 	bookLabel = [[PageView alloc] initWithFrame:CGRectMake(0, -20, 320, myHight-20)];
@@ -251,16 +263,53 @@
     mBook.delegate = self;
 	mBook.pageSize = CGSizeMake(bookLabel.frame.size.width-20, bookLabel.frame.size.height-20);//bookLabel.frame.size;
 	mBook.textFont = [UIFont systemFontOfSize:18];//bookLabel.font;
-
-	
-	UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(10, myHight-30, 300, 20)];//yu mark 更改滑动条，使其居中 -40
+    
+    // 屏幕中部显示跳转控制条
+	UIView *jumptoview = [[UIView alloc] initWithFrame:CGRectMake(10, (myHight-30)/2, 300, 85)]; // 100
+    jumptoview.hidden = YES;
+    [jumptoview setBackgroundColor:[UIColor blackColor]];
+    
+    jumpToView = [jumptoview retain];
+    [jumptoview release];
+    
+    // OK & Cancel button
+    //UIImage *image1 = [UIImage imageNamed:@"bookmark.png"];
+    //UIImage *image2 = [UIImage imageNamed:@"color.png"];
+    
+    {
+        UIButton *b = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [b setFrame:CGRectMake(170, 55, 40, 20)];
+        //[b setBackgroundImage:image1 forState:UIControlStateNormal];
+        //[b setBackgroundImage:image2 forState:UIControlStateHighlighted];
+        [b setTitle:@"确定" forState:UIControlStateNormal];
+        //[b setTitle:@"确定" forState:UIControlStateHighlighted];
+        [b addTarget:self action:@selector(okJumpButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [jumptoview addSubview:b];
+        okJumpButton = [b retain];
+    }    
+    {
+        UIButton *b = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [b setFrame:CGRectMake(90, 55, 40, 20)];
+        //[b setBackgroundImage:image1 forState:UIControlStateNormal];
+        //[b setBackgroundImage:image2 forState:UIControlStateHighlighted];
+        [b setTitle:@"取消" forState:UIControlStateNormal];
+        //[b setTitle:@"取消" forState:UIControlStateHighlighted];
+        [b addTarget:self action:@selector(cancelJumpButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [jumptoview addSubview:b];
+        cancelJumpButton = [b retain];
+    }
+    
+	//UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(10, myHight-30, 300, 20)];//yu mark 更改滑动条，使其居中 -40
+    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(0, 20, 300, 20)]; // as jumpToView subview
+    
 	slider.maximumValue = 300;
 	slider.minimumValue = 1;
 	slider.value = 1;
 	slider.alpha = 0.4;
 	[slider addTarget:self action:@selector(sliderEvent) forControlEvents:UIControlEventValueChanged];
 	bookSlider = [slider retain];
-	[self.view addSubview:slider];
+	[jumpToView addSubview:slider]; //[self.view addSubview:slider];
+    [self.view addSubview:jumpToView];
 	[slider release];
     
     [self performSelector:@selector(showPage) withObject:self afterDelay:0.25];
@@ -272,6 +321,46 @@
 
 
 //toolbar的响应事件
+
+-(void) okJumpButtonAction:(id) sender
+{
+    if (bookSlider.value != pageIndexBeforeJump) {
+        [self savePlace:bookSlider.value];
+    }
+    [jumpToView setHidden:YES]; // 将要添加动画
+}
+-(void) cancelJumpButtonAction:(id) sender
+{
+    if (pageIndex != pageIndexBeforeJump) {
+        pageIndex = pageIndexBeforeJump;
+        bookSlider.value = pageIndex;
+        bookLabel.text = [mBook stringWithPage:pageIndex];
+        [self savePlace:pageIndex];
+        [self showCurrentPage:AllPage];        
+    }
+    [jumpToView setHidden:YES]; // 将要添加动画
+}
+-(void) doJumpTo // 跳转
+{
+    //[jumpToView setHidden:NO]; // 将要添加动画
+    [self showHideJumpView];    
+}
+-(void) showHideJumpView
+{
+    BOOL isJumpToViewShown = ![jumpToView isHidden];
+    if (isJumpToViewShown) {
+        // 此时当取消跳转
+        if (pageIndex != pageIndexBeforeJump) {
+            pageIndex = pageIndexBeforeJump;
+            bookSlider.value = pageIndex;
+            bookLabel.text = [mBook stringWithPage:pageIndex];
+            [self savePlace:pageIndex];
+            [self showCurrentPage:AllPage];
+        }
+    }
+    [jumpToView setHidden:isJumpToViewShown]; // 将要添加动画
+}
+
 -(void) doPre
 {
   
@@ -386,6 +475,10 @@
 - (void)dealloc {
 	[headView release];
 	[bookSlider release];
+    [okJumpButton release];
+    [cancelJumpButton release];
+    [jumpToView release];
+    
 	mBook.delegate = nil;
 	[mBook release];
 	mBook = nil;
@@ -402,6 +495,7 @@
     NSUInteger lastPage = [saveDefaults integerForKey:singleBook.name];
     if(lastPage == 0) lastPage = 1;
     pageIndex = lastPage;
+    pageIndexBeforeJump = pageIndex;
     if(pageIndex > 1)
     {
         pageIndex = lastPage;
