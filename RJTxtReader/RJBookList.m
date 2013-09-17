@@ -100,7 +100,7 @@
     }
     
     imageView = [[UIImageView alloc] initWithImage:
-                 [UIImage imageNamed:@"background.jpg"]];
+                 [UIImage imageNamed:@"shelf_top.png"]]; // ahming background.jpg 与书架一样的顶部背景
     rect = CGRectMake(320, 0, 320, 45);
     imageView.frame =rect;
     [self addSubview:imageView];

@@ -32,10 +32,10 @@
 //            [self downloadxml ];
 //        }
 
-//yu mark 暂时去除，功能待测试
-//    [self loadTableView];
+    //yu mark 暂时去除，功能待测试 -> ahming uncommented 推荐页改为关于或帮助,设置等
+    [self loadTableView];
+    //[self loadxml]; // ahming 推荐页改为关于或帮助,设置等 去掉原内容
         
-          [self loadxml];        
     }
     return self;
 }
@@ -118,10 +118,15 @@
     CGRect rect = CGRectMake(0, 0, 320, myHight-45);
     UIImageView* backView = [[UIImageView alloc]initWithFrame:rect];
     backView.image = [UIImage imageNamed:@"background.jpg"];
+    
+    // ahming 推荐页改为关于或帮助,设置等 去掉原内容 将在此处添加
+    //
+    
+    
     //显示推荐列表
     dataTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, myHight-45)];
-    [dataTable setDelegate:self];
-    [dataTable setDataSource:self];
+    //[dataTable setDelegate:self]; // ahming 推荐页改为关于或帮助,设置等 去掉原内容
+    //[dataTable setDataSource:self];
     [dataTable setBackgroundView:backView];
     [self addSubview:dataTable];
     [backView release];

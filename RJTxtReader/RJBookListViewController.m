@@ -47,48 +47,46 @@
     self.navigationItem.titleView = titleView;
     [titleView release];
     
-   //yu mark 去除导航栏左右两菜单
-//    UIImage* image= [UIImage imageNamed:@"button.png"];
-//    CGRect frame_1= CGRectMake(5, 5, 80, 30);
-//    
-//    UIButton* leftButton= [[UIButton alloc] initWithFrame:frame_1];
-//    [leftButton setBackgroundImage:image forState:UIControlStateNormal];
-//    [leftButton setTitle:@"列表" forState:UIControlStateNormal];
-//    [leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    leftButton.titleLabel.font=[UIFont systemFontOfSize:14];
-//    [leftButton addTarget:self action:@selector(doList:) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"列表" style:UIBarButtonItemStylePlain target:self action:@selector(doList:)];
-//    leftItem.customView = leftButton;
-//    [leftButton release];
-//    
-//    self.navigationItem.leftBarButtonItem = leftItem;
-//    [leftItem release];
-//    
-//
-//    UIButton* rightButton= [[UIButton alloc] initWithFrame:frame_1];
-//    [rightButton setBackgroundImage:image forState:UIControlStateNormal];
-//    [rightButton setTitle:@"推荐" forState:UIControlStateNormal];
-//    [rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    rightButton.titleLabel.font=[UIFont systemFontOfSize:14];
-//    [rightButton addTarget:self action:@selector(doComment:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"推荐" style:UIBarButtonItemStyleBordered target:self action:@selector(doComment)];
-//    rightItem.customView = rightButton;
-//    [rightButton release];
-//    self.navigationItem.rightBarButtonItem = rightItem;
-//    [rightItem release];
+   //yu mark 去除导航栏左右两菜单 -> ahming uncommented 推荐页改为关于或帮助,设置等
+    UIImage* image= [UIImage imageNamed:@"button.png"];
+    CGRect frame_1= CGRectMake(5, 5, 80, 30);
+    
+    UIButton* leftButton= [[UIButton alloc] initWithFrame:frame_1];
+    [leftButton setBackgroundImage:image forState:UIControlStateNormal];
+    [leftButton setTitle:@"列表" forState:UIControlStateNormal];
+    [leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    leftButton.titleLabel.font=[UIFont systemFontOfSize:14];
+    [leftButton addTarget:self action:@selector(doList:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"列表" style:UIBarButtonItemStylePlain target:self action:@selector(doList:)];
+    leftItem.customView = leftButton;
+    [leftButton release];
+    
+    self.navigationItem.leftBarButtonItem = leftItem;
+    [leftItem release];
+    
+
+    UIButton* rightButton= [[UIButton alloc] initWithFrame:frame_1];
+    [rightButton setBackgroundImage:image forState:UIControlStateNormal];
+    [rightButton setTitle:@"关于" forState:UIControlStateNormal];
+    [rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    rightButton.titleLabel.font=[UIFont systemFontOfSize:14];
+    [rightButton addTarget:self action:@selector(doComment:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"关于" style:UIBarButtonItemStyleBordered target:self action:@selector(doComment)];
+    rightItem.customView = rightButton;
+    [rightButton release];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    [rightItem release];
     
     
-    
-    
-    rect = CGRectMake(0, 0, self.view.bounds.size.width, myHight);
+    rect = CGRectMake(0, 0, self.view.bounds.size.width, myHight); // ahming marks 最初有 -20 yu fixed
     self.view.frame = rect;
     listView = [[RJBookList alloc]initWithFrame:rect];
-    listView.contentSize = CGSizeMake(self.view.bounds.size.width*2, myHight-20);
+    listView.contentSize = CGSizeMake(self.view.bounds.size.width*2, myHight); // ahming removed -20
     listView.pagingEnabled = YES;
-    listView.scrollEnabled = NO;//yu mark 禁止左右滑动
+    // listView.scrollEnabled = NO; //yu mark 禁止左右滑动 -> ahming 推荐页改为关于或帮助,设置等, 最初没这行
     listView.delegate = self;
-    listView.backgroundColor =[UIColor blackColor];
+    listView.backgroundColor =[UIColor blackColor]; // ahming marks: yu added
     listView.nc = self.navigationController;
     [self.view addSubview:listView];
     [listView release];
@@ -116,11 +114,11 @@
     if(listView.contentOffset.x > 160)
     {
         [rightButton setTitle:@"返回" forState:UIControlStateNormal];
-        ((UILabel*)self.navigationItem.titleView).text = @"推荐";
+        ((UILabel*)self.navigationItem.titleView).text = @"关于";
     }
     else
     {
-        [rightButton setTitle:@"推荐" forState:UIControlStateNormal];
+        [rightButton setTitle:@"关于" forState:UIControlStateNormal];
         ((UILabel*)self.navigationItem.titleView).text = @"书架";
     }
 }
