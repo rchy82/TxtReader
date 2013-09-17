@@ -160,7 +160,7 @@
     {
         if([[PageNumArray objectAtIndex:i] integerValue] == pageIndex)
         {
-            UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"提示" message:@"已经添加此书签" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+            UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"view.bookmark.alert.title", nil) message:NSLocalizedString(@"view.bookmark.alert.desc.marked", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"view.bookmark.alert.button.ok", nil) otherButtonTitles:nil];
             [alertView show];
             [alertView release];
             return;
@@ -195,7 +195,7 @@
     [PageNumArray writeToFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_pagenum.plist"]]  atomically:YES];
     [BookTimeArray writeToFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_booktime.plist"]]  atomically:YES];
     
-    UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"提示" message:@"添加书签成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+    UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"view.bookmark.alert.title", nil) message:NSLocalizedString(@"view.bookmark.alert.desc.marked.ok", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"view.bookmark.alert.button.ok", nil) otherButtonTitles:nil];
     [alertView show];
     [alertView release];
     return;
@@ -215,7 +215,7 @@
     
         
     UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] init];
-    leftBarButtonItem.title = @"返回";
+    leftBarButtonItem.title = NSLocalizedString(@"nav.back", nil);
     leftBarButtonItem.target = self;
     leftBarButtonItem.action = @selector(back:);
     self.navigationItem.leftBarButtonItem = leftBarButtonItem;
@@ -278,22 +278,22 @@
     
     {
         UIButton *b = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [b setFrame:CGRectMake(170, 55, 40, 20)];
+        [b setFrame:CGRectMake(170, 55, 60, 20)];
         //[b setBackgroundImage:image1 forState:UIControlStateNormal];
         //[b setBackgroundImage:image2 forState:UIControlStateHighlighted];
-        [b setTitle:@"确定" forState:UIControlStateNormal];
-        //[b setTitle:@"确定" forState:UIControlStateHighlighted];
+        [b setTitle:NSLocalizedString(@"button.ok", nil) forState:UIControlStateNormal];
+        //[b setTitle:NSLocalizedString(@"button.ok", nil) forState:UIControlStateHighlighted];
         [b addTarget:self action:@selector(okJumpButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [jumptoview addSubview:b];
         okJumpButton = [b retain];
     }    
     {
         UIButton *b = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [b setFrame:CGRectMake(90, 55, 40, 20)];
+        [b setFrame:CGRectMake(70, 55, 60, 20)];
         //[b setBackgroundImage:image1 forState:UIControlStateNormal];
         //[b setBackgroundImage:image2 forState:UIControlStateHighlighted];
-        [b setTitle:@"取消" forState:UIControlStateNormal];
-        //[b setTitle:@"取消" forState:UIControlStateHighlighted];
+        [b setTitle:NSLocalizedString(@"button.cancel", nil) forState:UIControlStateNormal];
+        //[b setTitle:NSLocalizedString(@"button.cancel", nil) forState:UIControlStateHighlighted];
         [b addTarget:self action:@selector(cancelJumpButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [jumptoview addSubview:b];
         cancelJumpButton = [b retain];

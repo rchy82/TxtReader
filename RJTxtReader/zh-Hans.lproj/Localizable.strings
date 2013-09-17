@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  RJTxtReader
+
+  Created by ahming on 13-9-17.
+
+*/
+"nav.modelist" = "列表";
+"nav.modeshelf" = "书架";
+"nav.about" = "关于";
+"nav.back" = "返回";
+
+"about.desc" = "\n  书籍是人类进步的阶梯. \n  欢迎阅读.";
+
+"view.bookmark.alert.title" = "提示";
+"view.bookmark.alert.desc.marked" = "已经添加此书签";
+"view.bookmark.alert.desc.marked.ok" = "成功添加书签";
+"view.bookmark.alert.button.ok" = "确认";
+
+"button.ok" = "确认";
+"button.cancel" = "取消";
+
+"nav.book.index" = "目录";
+"nav.bookmarks" = "书签";
+"bookmarks.added.time" = "书签时间：";
+"bookmarks.page.on" = "第%@页  ";

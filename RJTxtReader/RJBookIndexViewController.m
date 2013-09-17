@@ -45,14 +45,14 @@
     if(isShowIndex)
     {
         isShowIndex = NO;
-        [self.navigationItem.rightBarButtonItem setTitle:@"目录"];
+        [self.navigationItem.rightBarButtonItem setTitle:NSLocalizedString(@"nav.book.index", nil)];
         bookIndexTableView.hidden = YES;
         bookmarkTableView.hidden = NO;
         
     }
     else {
         isShowIndex = YES;
-        [self.navigationItem.rightBarButtonItem setTitle:@"书签"];
+        [self.navigationItem.rightBarButtonItem setTitle:NSLocalizedString(@"nav.bookmarks", nil)];
         bookIndexTableView.hidden = NO;
         bookmarkTableView.hidden = YES;
     }
@@ -68,7 +68,7 @@
     [self.navigationController setToolbarHidden:YES animated:TRUE];
     isShowIndex = YES;
     UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] init];
-    leftBarButtonItem.title = @"返回";
+    leftBarButtonItem.title = NSLocalizedString(@"nav.back", nil);
     leftBarButtonItem.target = self;
     leftBarButtonItem.action = @selector(back:);
     self.navigationItem.leftBarButtonItem = leftBarButtonItem;
@@ -76,7 +76,7 @@
     [leftBarButtonItem release];
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] init];
-    rightItem.title = @"书签";
+    rightItem.title = NSLocalizedString(@"nav.bookmarks", nil);
     rightItem.target = self;
     rightItem.action = @selector(indexOrbookmark:);
     self.navigationItem.rightBarButtonItem = rightItem;
@@ -166,8 +166,8 @@
         NSString *text = [[ChatperArray objectAtIndex:indexPath.row] substringFromIndex:9];
         cell.textLabel.text = [text substringWithRange:NSMakeRange(0, text.length-4)];
         
-        NSString *booktime = @"书签时间：";
-        NSString *detailText = [NSString stringWithFormat:@"第%@页  ",[PageNumArray objectAtIndex:indexPath.row]];
+        NSString *booktime = NSLocalizedString(@"bookmarks.added.time", nil);
+        NSString *detailText = [NSString stringWithFormat:NSLocalizedString(@"bookmarks.page.on", nil),[PageNumArray objectAtIndex:indexPath.row]];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
         cell.detailTextLabel.text = [detailText stringByAppendingString:[booktime stringByAppendingString:[BookTimeArray objectAtIndex:indexPath.row]]];
         

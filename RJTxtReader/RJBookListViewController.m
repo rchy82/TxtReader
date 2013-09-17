@@ -38,11 +38,11 @@
     
     [self.navigationController setToolbarHidden:YES animated:TRUE];
 
-    CGRect rect = CGRectMake(140, 0, 40, 44);
+    CGRect rect = CGRectMake(140, 0, 60, 44);
     UILabel *titleView = [[UILabel alloc] initWithFrame:rect];
     titleView.opaque = YES;
     titleView.backgroundColor = [UIColor clearColor];
-    titleView.text = @"书架";
+    titleView.text = NSLocalizedString(@"nav.modeshelf", nil); // 书架
     titleView.textColor = [UIColor whiteColor];
     self.navigationItem.titleView = titleView;
     [titleView release];
@@ -53,11 +53,11 @@
     
     UIButton* leftButton= [[UIButton alloc] initWithFrame:frame_1];
     [leftButton setBackgroundImage:image forState:UIControlStateNormal];
-    [leftButton setTitle:@"列表" forState:UIControlStateNormal];
+    [leftButton setTitle:NSLocalizedString(@"nav.modelist", nil) forState:UIControlStateNormal];
     [leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     leftButton.titleLabel.font=[UIFont systemFontOfSize:14];
     [leftButton addTarget:self action:@selector(doList:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"列表" style:UIBarButtonItemStylePlain target:self action:@selector(doList:)];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"nav.modelist", nil) style:UIBarButtonItemStylePlain target:self action:@selector(doList:)];
     leftItem.customView = leftButton;
     [leftButton release];
     
@@ -67,12 +67,12 @@
 
     UIButton* rightButton= [[UIButton alloc] initWithFrame:frame_1];
     [rightButton setBackgroundImage:image forState:UIControlStateNormal];
-    [rightButton setTitle:@"关于" forState:UIControlStateNormal];
+    [rightButton setTitle:NSLocalizedString(@"nav.about", nil) forState:UIControlStateNormal];
     [rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     rightButton.titleLabel.font=[UIFont systemFontOfSize:14];
     [rightButton addTarget:self action:@selector(doComment:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"关于" style:UIBarButtonItemStyleBordered target:self action:@selector(doComment)];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"nav.about", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(doComment)];
     rightItem.customView = rightButton;
     [rightButton release];
     self.navigationItem.rightBarButtonItem = rightItem;
@@ -113,13 +113,13 @@
     
     if(listView.contentOffset.x > 160)
     {
-        [rightButton setTitle:@"返回" forState:UIControlStateNormal];
-        ((UILabel*)self.navigationItem.titleView).text = @"关于";
+        [rightButton setTitle:NSLocalizedString(@"nav.back", nil) forState:UIControlStateNormal];
+        ((UILabel*)self.navigationItem.titleView).text = NSLocalizedString(@"nav.about", nil);
     }
     else
     {
-        [rightButton setTitle:@"关于" forState:UIControlStateNormal];
-        ((UILabel*)self.navigationItem.titleView).text = @"书架";
+        [rightButton setTitle:NSLocalizedString(@"nav.about", nil) forState:UIControlStateNormal];
+        ((UILabel*)self.navigationItem.titleView).text = NSLocalizedString(@"nav.modeshelf", nil);
     }
 }
 
@@ -132,15 +132,15 @@
     [listView doTableViewShowOrHide];
     UILabel* titlView = (UILabel*)self.navigationItem.titleView;
     UIButton* leftButton = (UIButton*)self.navigationItem.leftBarButtonItem.customView;
-    if([leftButton.titleLabel.text isEqualToString: @"书架"])
+    if([leftButton.titleLabel.text isEqualToString: NSLocalizedString(@"nav.modeshelf", nil)])
     {
-        titlView.text = @"书架";
-        [leftButton setTitle:@"列表" forState:UIControlStateNormal];
+        titlView.text = NSLocalizedString(@"nav.modeshelf", nil);
+        [leftButton setTitle:NSLocalizedString(@"nav.modelist", nil) forState:UIControlStateNormal];
     }
     else
     {
-        titlView.text = @"列表";
-        [leftButton setTitle:@"书架" forState:UIControlStateNormal];
+        titlView.text = NSLocalizedString(@"nav.modelist", nil);
+        [leftButton setTitle:NSLocalizedString(@"nav.modeshelf", nil) forState:UIControlStateNormal];
     }
 }
 

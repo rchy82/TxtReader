@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  RJTxtReader
+
+  Created by ahming on 13-9-17.
+
+*/
+"nav.modelist" = "List";
+"nav.modeshelf" = "Shelf";
+"nav.about" = "About";
+"nav.back" = "Back";
+
+"about.desc" = "Welcome to read this book.";
+
+"view.bookmark.alert.title" = "Tips";
+"view.bookmark.alert.desc.marked" = "This bookmark has been maked before";
+"view.bookmark.alert.desc.marked.ok" = "Successfully added bookmark";
+"view.bookmark.alert.button.ok" = "OK";
+
+"button.ok" = "OK";
+"button.cancel" = "Cancel";
+
+"nav.book.index" = "Index";
+"nav.bookmarks" = "Bookmarks";
+"bookmarks.added.time" = "Added on：";
+"bookmarks.page.on" = "Page %@  ";

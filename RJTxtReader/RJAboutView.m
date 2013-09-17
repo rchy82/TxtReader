@@ -37,7 +37,7 @@
     [self addSubview:aboutView];
     
     aboutDesc = [[UITextView alloc] initWithFrame:CGRectMake(10, 20, 300, 100)];
-    [aboutDesc setText:@"\n  书籍是人类进步的阶梯. \n  欢迎阅读."];
+    [aboutDesc setText:NSLocalizedString(@"about.desc", nil)];
     aboutDesc.textColor = [UIColor whiteColor];
     aboutDesc.backgroundColor = [UIColor clearColor]; // 透明背景
     aboutDesc.editable = NO;
