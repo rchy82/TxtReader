@@ -79,10 +79,10 @@
     [rightItem release];
     
     
-    rect = CGRectMake(0, 0, self.view.bounds.size.width, myHight); // ahming marks 最初有 -20 yu fixed
+    rect = CGRectMake(0, 0, self.view.bounds.size.width, myHight); // ahming marks 最初有 -20 yu fixed 去掉, (最最初在realwizard:RJTxtReader中为 self.view.bounds.size.height)
     self.view.frame = rect;
     listView = [[RJBookList alloc]initWithFrame:rect];
-    listView.contentSize = CGSizeMake(self.view.bounds.size.width*2, myHight); // ahming removed -20
+    listView.contentSize = CGSizeMake(self.view.bounds.size.width*2, myHight); // ahming removed -20, (最最初在realwizard:RJTxtReader中为 self.view.bounds.size.height)
     listView.pagingEnabled = YES;
     // listView.scrollEnabled = NO; //yu mark 禁止左右滑动 -> ahming 推荐页改为关于或帮助,设置等, 最初没这行
     listView.delegate = self;

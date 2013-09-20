@@ -17,7 +17,7 @@
         
         self.backgroundColor = [UIColor whiteColor];
         
-        pageL = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, self.frame.size.width-20, myHight-20)];
+        pageL = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, self.frame.size.width-20, self.frame.size.height-20)]; // ahming-marks-page     myHight-20 应该指减去状态栏的高度, x=15和width-20目的系使屏幕两边有个gap, y=10目的亦同 -> myHight-20 优化, 此处height不应该再引用 myHight, 详情见 KDBookViewController.m 引用处
         pageL.backgroundColor = [UIColor clearColor];
         pageL.numberOfLines = 0;
         pageL.font = [UIFont systemFontOfSize:18];		

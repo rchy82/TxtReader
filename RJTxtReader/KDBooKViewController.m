@@ -250,22 +250,33 @@
     [self.navigationController setToolbarHidden:isNavHideflage animated:TRUE];
 
 	
-	self.view.backgroundColor = [UIColor clearColor];
+	self.view.backgroundColor = [UIColor clearColor]; // clearColor ahming test whiteColor -> 需要修改更多. 确保点击太阳转换黑白字体颜色时正常
 	
 	pageIndex = 1;
     pageIndexBeforeJump =1;
 	headView = nil;
-		
-	bookLabel = [[PageView alloc] initWithFrame:CGRectMake(0, -20, 320, myHight-20)];
+
+	bookLabel = [[PageView alloc] initWithFrame:CGRectMake(0, 0, 320,
+                                                           myHight - 20 // 这个20应对应状态栏,PageView中的height不应该再引用myHight
+                                                           - RJ_UI_BOOK_SLIDER_HEIGHT_ON_BOTTOM
+                                                           - RJ_UI_BOOK_VIEW_ADS_HEIGHT_ON_BOTTOM
+                                                           )]; // ahming-marks-page // 为什么最初 y -20 -> test y 0 -> OK
 	[self.view addSubview:bookLabel];
     
 	mBook = [[KDBook alloc]initWithBook:bookIndex];
     mBook.delegate = self;
-	mBook.pageSize = CGSizeMake(bookLabel.frame.size.width-20, bookLabel.frame.size.height-20);//bookLabel.frame.size;
+    
+    // ahming marks: 猜测, 下面的pageSize与textFont必须保证与PageView中init处的设置相同, 否则会引起页面内容与实际页数不同步?
+    // --> 基础可验证的确如此: 对应下面 bookLabel.frame.size.height-20, 若在 PageView 中不相同, 如使用 bookLabel.frame.size.height不减去20的话, 则从第7部书可验证. 此时第7部书的不同页数的高度参差不齐, 且可留意第2页最后一行, "容纳的人数20 - 50人", 20和-50分在两页, 且20只显示部分, 其他部分被屏幕外部遮住了. 若 PageView 处也使用 bookLabel.frame.size.height-20, 则第7部书不同页数的高度都相同, 没有参差. 不过奇怪的系此时, "容纳的人数20 - 50人"这句, 20所在的一行显示缺失了. 可知这句有特殊性.
+    // 那么, 后期应该优化一下, 确保这两片的设置相同.
+	mBook.pageSize = CGSizeMake(bookLabel.frame.size.width-20, bookLabel.frame.size.height-20);//bookLabel.frame.size; // ahming-marks-page
 	mBook.textFont = [UIFont systemFontOfSize:18];//bookLabel.font;
     
     // 屏幕中部显示跳转控制条
-	UIView *jumptoview = [[UIView alloc] initWithFrame:CGRectMake(10, (myHight-30)/2, 300, 85)]; // 100
+	UIView *jumptoview = [[UIView alloc] initWithFrame:CGRectMake(10,
+                                                                  (myHight - 20 // 20对应状态栏
+                                                                   - 85         // 高度
+                                                                   )/2, 300, 85)]; // 100 -> 居中
     jumptoview.hidden = YES;
     [jumptoview setBackgroundColor:[UIColor blackColor]];
     

@@ -28,7 +28,7 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     //yu mark 增加隐藏状态栏
-    [application setStatusBarHidden:YES];
+    //[application setStatusBarHidden:YES]; // ahming-marks-page -> developing 状态栏的判断下次完善更新
     
     [[RJBookData sharedRJBookData] loadXml:@"book.xml"];
 

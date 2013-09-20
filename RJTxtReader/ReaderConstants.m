@@ -8,6 +8,6 @@
 
 #import "ReaderConstants.h"
 
-@implementation ReaderConstants
+//@implementation ReaderConstants
 
-@end
+//@end
