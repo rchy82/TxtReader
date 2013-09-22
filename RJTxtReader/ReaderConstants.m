@@ -8,6 +8,15 @@
 
 #import "ReaderConstants.h"
 
-//@implementation ReaderConstants
+//#### NSUserDefaults
+//#### refs: Viewer.xcodeproj
+//####
 
-//@end
+NSString *const kReaderCopyrightNotice = @"TxtReader v1.x • Copyright © 2011-2013 jjjjj. All rights reserved.";
+
+NSString *const kReaderSettingsAppVersion = @"AppVersion";
+//NSString *const kReaderSettingsCurrentFolder = @"CurrentFolder";
+//NSString *const kReaderSettingsCurrentDocument = @"CurrentDocument";
+NSString *const kReaderSettingsHideStatusBar = @"HideStatusBar";
+
+NSString *const kReaderSettingTextColorIndex = @"TextColorIndex";

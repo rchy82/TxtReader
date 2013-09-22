@@ -35,3 +35,17 @@
 #else
   #define RJ_UI_BOOK_VIEW_ADS_HEIGHT_ON_BOTTOM 0
 #endif
+
+
+//#### NSUserDefaults
+//#### refs: Viewer.xcodeproj
+//####
+
+extern NSString *const kReaderCopyrightNotice;
+
+extern NSString *const kReaderSettingsAppVersion;
+//extern NSString *const kReaderSettingsCurrentFolder;
+//extern NSString *const kReaderSettingsCurrentDocument;
+extern NSString *const kReaderSettingsHideStatusBar; // 目前只完成程序启动初始化, 未应用
+
+extern NSString *const kReaderSettingTextColorIndex;

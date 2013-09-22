@@ -204,6 +204,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 读取设置
+    NSUserDefaults *saveDefaults = [NSUserDefaults standardUserDefaults];
+    NSUInteger textColorIndex = [saveDefaults integerForKey:kReaderSettingTextColorIndex];
+    
     isShowIndex = NO;
     
     currentLight = [UIScreen mainScreen].brightness;
@@ -261,6 +265,7 @@
                                                            - RJ_UI_BOOK_SLIDER_HEIGHT_ON_BOTTOM
                                                            - RJ_UI_BOOK_VIEW_ADS_HEIGHT_ON_BOTTOM
                                                            )]; // ahming-marks-page // 为什么最初 y -20 -> test y 0 -> OK
+    [bookLabel updateTextColorByIndex:textColorIndex];
 	[self.view addSubview:bookLabel];
     
 	mBook = [[KDBook alloc]initWithBook:bookIndex];
@@ -403,7 +408,9 @@
 }
 -(void) doFont
 {
-    [bookLabel changeColor];
+    NSUInteger resultColorIndex = [bookLabel changeColor];
+    NSUserDefaults *saveDefaults = [NSUserDefaults standardUserDefaults];
+    [saveDefaults setInteger:resultColorIndex forKey:kReaderSettingTextColorIndex];
 }
 -(void) doColor //调节屏幕亮度
 {

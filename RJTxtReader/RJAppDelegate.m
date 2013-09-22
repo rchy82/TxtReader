@@ -10,6 +10,7 @@
 
 #import "RJBookListViewController.h"
 #import "RJBookData.h"
+#import "ReaderConstants.h"
 
 @implementation RJAppDelegate
 
@@ -25,6 +26,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self registerAppDefaults]; // Register various application settings defaults
+
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     //yu mark 增加隐藏状态栏
@@ -43,6 +46,8 @@
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
+    [[NSUserDefaults standardUserDefaults] synchronize]; // Save user defaults
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -64,6 +69,30 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    [[NSUserDefaults standardUserDefaults] synchronize]; // Save user defaults
 }
+
+- (void)registerAppDefaults
+{
+	NSNumber *hideStatusBar = [NSNumber numberWithBool:YES];
+    
+	NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    
+	NSString *version = [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey];
+    
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults]; // User defaults
+    
+	NSDictionary *defaults = [NSDictionary dictionaryWithObject:hideStatusBar forKey:kReaderSettingsHideStatusBar];
+    
+	[userDefaults registerDefaults:defaults]; [userDefaults synchronize]; // Save user defaults
+    
+	[userDefaults setObject:version forKey:kReaderSettingsAppVersion]; // App version    
+    //NSLog(@"Version is: %@", version);
+    
+    //[userDefaults setInteger:0 forKey:kReaderSettingTextColorIndex]; // should not set here, default value will be set when first calling integerForKey
+    
+}
+
 
 @end
