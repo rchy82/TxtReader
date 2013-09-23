@@ -35,6 +35,8 @@
 @property (nonatomic, assign) CGSize     pageSize;
 @property (nonatomic, assign) id<KDBookDelegate>  delegate;
 @property (nonatomic, readonly) unsigned long long bookSize;
+@property (nonatomic) BOOL isPaginating; // YES表示当前分页线程进行中, 在按"返回"回到书本列表时,需要置NO使该线程迟早结束
+
 //返回指定页的字符串；
 - (NSString *)stringWithPage:(NSUInteger)pageIndex;
 - (unsigned long long)offsetWithPage:(NSUInteger)pageIndex;

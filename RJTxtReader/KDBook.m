@@ -15,6 +15,7 @@
 @synthesize pageSize;
 @synthesize delegate;
 @synthesize bookSize;
+@synthesize isPaginating; // YES表示当前分页线程进行中, 在按"返回"回到书本列表时,需要置NO使该线程迟早结束
 
 - (NSString *)filePath:(NSString *)fileName{
 	if (fileName == nil) {
@@ -214,12 +215,16 @@
     
 	unsigned long long index = [[pageIndexArray objectAtIndex:count-1] unsignedLongLongValue];
     
-	while (index < bookSize) {
+    //isPaginating = YES; // 分页开始 放此处OK?还是需要放到外面?亦或类似c的volatile? -> 放外面测试 OK
+	while (index < bookSize && isPaginating) { 
 		[handle seekToFileOffset:index];
 		index = [self indexOfPage:handle textFont:textFont];
 		[pageIndexArray addObject:[NSNumber numberWithUnsignedLongLong:index]];
 		//NSLog(@"--index:%lld",index);
   }
+    isPaginating = NO; // 分页正常结束
+    //NSLog(@"Instantly over, OK!");
+    
     //yu mark 未通过测试，暂时去除
    // [self getAllPage];
 	[self bookDidRead:[pageIndexArray count]];
@@ -248,6 +253,7 @@
 	
 	//NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	thread = [[NSThread alloc]initWithTarget:self selector:@selector(bookIndexx) object:nil];
+    isPaginating = YES; // 分页开始 -> OK
 	[thread start];
 	//[pool release];
 	//[NSThread detachNewThreadSelector:@selector(bookIndex) toTarget:self withObject:nil];
@@ -266,6 +272,7 @@
 		textFont = [[UIFont systemFontOfSize:16] retain];
 	    pageSize = CGSizeMake(320, 460);
         
+        isPaginating = NO;
 	}
 	return self;
 }

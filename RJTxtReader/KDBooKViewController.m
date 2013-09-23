@@ -124,6 +124,8 @@
 
 
 -(void)back:(id)sender{
+    mBook.isPaginating = NO; // 尽早使进行中的分页进程结束
+    
     UINavigationBar *navBar = self.navigationController.navigationBar;
     UIView* aView = [navBar.subviews objectAtIndex:0];
     aView.hidden = YES;

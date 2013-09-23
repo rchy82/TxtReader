@@ -194,6 +194,7 @@
     cell.textLabel.text=singleBook.name;
     cell.textLabel.textColor = [UIColor blackColor];
     cell.textLabel.font = [UIFont systemFontOfSize:16];
+    cell.indentationLevel = 1; // 左边多一个缩进距离
     return cell;
 }
 
