@@ -204,8 +204,8 @@
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
     
+    [self showCurrentPage:AllPage];
     // 读取设置
     NSUserDefaults *saveDefaults = [NSUserDefaults standardUserDefaults];
     NSUInteger textColorIndex = [saveDefaults integerForKey:kReaderSettingTextColorIndex];
@@ -556,7 +556,7 @@
     pageShow.textColor = [UIColor whiteColor];
     pageShow.backgroundColor = [UIColor clearColor];
     pageShow.textAlignment = UITextAlignmentCenter;
-    pageShow.text = [NSString stringWithFormat:@"%d",currentPage];
+    pageShow.text = [NSString stringWithFormat:@"%d/%d",currentPage,AllPage];
     self.navigationItem.titleView = pageShow;
     [pageShow release];
  }

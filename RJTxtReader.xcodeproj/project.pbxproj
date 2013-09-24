@@ -316,7 +316,6 @@
 		CFAA7D4115E759FA004B0889 /* SDImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDImageCache.m; sourceTree = "<group>"; };
 		CFAA7D4215E759FA004B0889 /* SDImageCacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCacheDelegate.h; sourceTree = "<group>"; };
 		CFAA7D4315E759FA004B0889 /* SDWebImageCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageCompat.h; sourceTree = "<group>"; };
-		CFAA7D4415E759FA004B0889 /* SDWebImageCompat副本.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDWebImageCompat副本.h"; sourceTree = "<group>"; };
 		CFAA7D4515E759FA004B0889 /* SDWebImageDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDecoder.h; sourceTree = "<group>"; };
 		CFAA7D4615E759FA004B0889 /* SDWebImageDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDecoder.m; sourceTree = "<group>"; };
 		CFAA7D4715E759FA004B0889 /* SDWebImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDownloader.h; sourceTree = "<group>"; };
@@ -628,7 +627,6 @@
 				CFAA7D4115E759FA004B0889 /* SDImageCache.m */,
 				CFAA7D4215E759FA004B0889 /* SDImageCacheDelegate.h */,
 				CFAA7D4315E759FA004B0889 /* SDWebImageCompat.h */,
-				CFAA7D4415E759FA004B0889 /* SDWebImageCompat副本.h */,
 				CFAA7D4515E759FA004B0889 /* SDWebImageDecoder.h */,
 				CFAA7D4615E759FA004B0889 /* SDWebImageDecoder.m */,
 				CFAA7D4715E759FA004B0889 /* SDWebImageDownloader.h */,

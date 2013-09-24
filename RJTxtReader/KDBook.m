@@ -226,7 +226,7 @@
     //NSLog(@"Instantly over, OK!");
     
     //yu mark 未通过测试，暂时去除
-   // [self getAllPage];
+    [self getAllPage];
 	[self bookDidRead:[pageIndexArray count]];
 	[pool release];
 }
@@ -294,11 +294,11 @@
 }
 
 //yu mark 获取页码总数有问题，未通过测试，暂时去除
-//-(void)getAllPage{
-//    allPage=[pageIndexArray count];
-//    [self showCurrentPage:allPage];
-//    NSLog(@"--------------------%d",allPage);
-//}
+-(void)getAllPage{
+    allPage=[pageIndexArray count];
+    [self showCurrentPage:allPage];
+    NSLog(@"--------------------%d",allPage);
+}
 
 - (void)dealloc{
 	[thread release];
