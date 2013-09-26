@@ -70,8 +70,10 @@
         [self ShowHideNav];
         
         // 单击时当作确认跳转
-        [self savePlace:bookSlider.value];
-        [jumpToView setHidden:YES];
+        if ( ![jumpToView isHidden] ) {
+            [self savePlace:bookSlider.value];
+            [jumpToView setHidden:YES];
+        }
         
         if (isNavHideflage == NO)
         {
@@ -81,13 +83,15 @@
     }
     if(deltaX > deltaY)
     {
-        if(gestureStartPoint.x < currentPosition.x) //从左往右，往前翻页
-        {
-            [self doPre];
-        }
-        else
-        {
-            [self doNext];
+        if (mBook.isPaginating != RJ_PAGINATING_STATE_UPDATE_RUNNING) { //
+            if(gestureStartPoint.x < currentPosition.x) //从左往右，往前翻页
+            {
+                [self doPre];
+            }
+            else
+            {
+                [self doNext];
+            }
         }
     }
 }
@@ -124,7 +128,7 @@
 
 
 -(void)back:(id)sender{
-    mBook.isPaginating = NO; // 尽早使进行中的分页进程结束
+    mBook.isPaginating = RJ_PAGINATING_STATE_IDLE; // 尽早使进行中的分页进程结束
     
     UINavigationBar *navBar = self.navigationController.navigationBar;
     UIView* aView = [navBar.subviews objectAtIndex:0];
@@ -209,6 +213,7 @@
     // 读取设置
     NSUserDefaults *saveDefaults = [NSUserDefaults standardUserDefaults];
     NSUInteger textColorIndex = [saveDefaults integerForKey:kReaderSettingTextColorIndex];
+    NSUInteger textFontSizeIndex = [saveDefaults integerForKey:kReaderSettingTextFontSizeIndex];
     
     isShowIndex = NO;
     
@@ -236,16 +241,18 @@
     toolBar.barStyle = UIBarStyleBlackTranslucent;
     
     //为toolbar增加按钮
-//    UIBarButtonItem *one = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"play-last1.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doPre)];
-    // ahming 滑动条点击跳转时显示到中间
-    UIBarButtonItem *one = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"dojump.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doJumpTo)];
-
+//    UIBarButtonItem *one = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"play-last1.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doPre)] autorelease];
+    UIBarButtonItem *one = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"dojump.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doJumpTo)] autorelease]; // ahming 滑动条点击跳转时显示到中间
+    UIBarButtonItem *two = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"color.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doFontColor)] autorelease];
+    UIBarButtonItem *three = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"light.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doLightLevel)] autorelease];
+//    UIBarButtonItem *four = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"play-next.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doNext)] autorelease];
+    UIBarButtonItem *four = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"fontsize.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doFontSize)] autorelease]; // 更改字体大小
+    UIBarButtonItem *five = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"index.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doIndex)] autorelease];
+    UIBarButtonItem *flexItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
     
-    UIBarButtonItem *two = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"color.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doFont)];    
-    UIBarButtonItem *three = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"light.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doColor)];
-    UIBarButtonItem *four = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"play-next.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doNext)];
-    UIBarButtonItem *five = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"index.png"] style:UIBarButtonItemStylePlain target:self action:@selector(doIndex)];
-    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    [one setEnabled:NO]; // 跳转和改文字大小需要等待分页结束才允许使用
+    [four setEnabled:NO];
+    
     [self setToolbarItems: [NSArray arrayWithObjects: one,flexItem, two,flexItem, three,flexItem, four,flexItem, five, nil]];
     [self.navigationController.toolbar sizeToFit];
 
@@ -268,6 +275,7 @@
                                                            - RJ_UI_BOOK_VIEW_ADS_HEIGHT_ON_BOTTOM
                                                            )]; // ahming-marks-page // 为什么最初 y -20 -> test y 0 -> OK
     [bookLabel updateTextColorByIndex:textColorIndex];
+    [bookLabel updateTextFontSizeByIndex:textFontSizeIndex];
 	[self.view addSubview:bookLabel];
     
 	mBook = [[KDBook alloc]initWithBook:bookIndex];
@@ -277,7 +285,7 @@
     // --> 基础可验证的确如此: 对应下面 bookLabel.frame.size.height-20, 若在 PageView 中不相同, 如使用 bookLabel.frame.size.height不减去20的话, 则从第7部书可验证. 此时第7部书的不同页数的高度参差不齐, 且可留意第2页最后一行, "容纳的人数20 - 50人", 20和-50分在两页, 且20只显示部分, 其他部分被屏幕外部遮住了. 若 PageView 处也使用 bookLabel.frame.size.height-20, 则第7部书不同页数的高度都相同, 没有参差. 不过奇怪的系此时, "容纳的人数20 - 50人"这句, 20所在的一行显示缺失了. 可知这句有特殊性.
     // 那么, 后期应该优化一下, 确保这两片的设置相同.
 	mBook.pageSize = CGSizeMake(bookLabel.frame.size.width-20, bookLabel.frame.size.height-20);//bookLabel.frame.size; // ahming-marks-page
-	mBook.textFont = [UIFont systemFontOfSize:18];//bookLabel.font;
+	mBook.textFont = [UIFont systemFontOfSize:[bookLabel getTextFontSize]];//bookLabel.font;
     
     // 屏幕中部显示跳转控制条
 	UIView *jumptoview = [[UIView alloc] initWithFrame:CGRectMake(10,
@@ -408,13 +416,42 @@
         return ;
     }
 }
--(void) doFont
+-(void) doFontColor
 {
     NSUInteger resultColorIndex = [bookLabel changeColor];
     NSUserDefaults *saveDefaults = [NSUserDefaults standardUserDefaults];
     [saveDefaults setInteger:resultColorIndex forKey:kReaderSettingTextColorIndex];
 }
--(void) doColor //调节屏幕亮度
+-(void) doFontSize // 循环切换文字大小
+{
+    // 此处要更新 MODEL KDBook的分页, 调整页数等
+    // 其他细节: 分页时基于首页首行还是当前页当前行? 怎样重新载入视图?
+    // 并需要确保之前的分页已结束, 例如防止刚进入书本后立即点击字体切换出现问题
+    CGFloat previousFontSize = [bookLabel getTextFontSize];
+    mBook.textFont = [UIFont systemFontOfSize:[bookLabel getTextFontSizeForTestChange]]; // only try in advance
+    if ([mBook pageArUpdate]) {
+        
+        // 更新控件
+        [self.navigationController.toolbar.items[0] setEnabled:NO];
+        [self.navigationController.toolbar.items[6] setEnabled:NO];
+        
+        NSUInteger resultFontSizeIndex = [bookLabel changeFontSize];
+        NSUserDefaults *saveDefault = [NSUserDefaults standardUserDefaults];
+        [saveDefault setInteger:resultFontSizeIndex forKey:kReaderSettingTextFontSizeIndex];
+    } else {
+        mBook.textFont = [UIFont systemFontOfSize:previousFontSize];
+        
+        // 给出更友好的提示信息 (采取提示信息而不是直接停止前次分页的原因, 系避免更复杂的修改)
+        // --> 后面优化区分初次进入书本点击改字体和正常情况下连续点击切换字体(加timer?)
+        // --> 使用按钮setEnable后不需要了
+//        UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"view.bookmark.alert.title", nil) message:NSLocalizedString(@"toolbar.btn.fontsize.hit.waiting", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"view.bookmark.alert.button.ok", nil) otherButtonTitles:nil];
+//        [alertView show];
+//        [alertView release];
+    }
+
+}
+
+-(void) doLightLevel //调节屏幕亮度
 {
     currentLight = currentLight -0.1;
     if(currentLight < 0.3)
@@ -516,9 +553,12 @@
     if(lastPage == 0) lastPage = 1;
     pageIndex = lastPage;
     pageIndexBeforeJump = pageIndex;
-    if(pageIndex > 1)
+    
+    // 需要去掉下面第1页关于stringWithPage的特殊性, 与其他页一致, 因为: (1) stringWithPage中不需要区分第1页, 全部页统一一致
+    // (2) stringWithPage含有 minEnoughStringLength 的更新, 改字体等时初次进入书本内容时需要保证更新
+    //if(pageIndex > 1)
     {
-        pageIndex = lastPage;
+        //pageIndex = lastPage; // 重复了
         bookSlider.value = pageIndex;
         NSString* string = [mBook stringWithPage:pageIndex];
         if(string)
@@ -560,6 +600,33 @@
     self.navigationItem.titleView = pageShow;
     [pageShow release];
  }
+
+
+- (NSUInteger)getPageIndex
+{
+    return pageIndex;
+}
+
+- (void)updateAfterUpdatePageWithPageIndex:(NSInteger) index
+{
+    if(index > -1) {
+        pageIndex = index;
+        [self savePlace:pageIndex];
+        
+        // 请注意, 此处目前没有更新新分页后的实际页内容. 目的系避免看起来不自然
+    }
+    
+    // 更新控件
+    [self.navigationController.toolbar.items[0] setEnabled:YES];
+    [self.navigationController.toolbar.items[6] setEnabled:YES];
+}
+
+- (void)updatePageStringBeforeUpdate:(NSString *) pageString
+{
+    bookLabel.text = pageString;
+    
+    // 无需其他任何操作了, 例如不需要保存
+}
 
 
 @end

@@ -49,3 +49,4 @@ extern NSString *const kReaderSettingsAppVersion;
 extern NSString *const kReaderSettingsHideStatusBar; // 目前只完成程序启动初始化, 未应用
 
 extern NSString *const kReaderSettingTextColorIndex;
+extern NSString *const kReaderSettingTextFontSizeIndex;

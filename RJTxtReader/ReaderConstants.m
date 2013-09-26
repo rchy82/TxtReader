@@ -20,3 +20,4 @@ NSString *const kReaderSettingsAppVersion = @"AppVersion";
 NSString *const kReaderSettingsHideStatusBar = @"HideStatusBar";
 
 NSString *const kReaderSettingTextColorIndex = @"TextColorIndex";
+NSString *const kReaderSettingTextFontSizeIndex = @"TextFontSizeIndex";

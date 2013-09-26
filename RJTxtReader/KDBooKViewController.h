@@ -51,8 +51,9 @@
 -(void) cancelJumpButtonAction:(id) sender;
 
 -(void) doPre;
--(void) doFont;
--(void) doColor;
+-(void) doFontColor;
+-(void) doFontSize;
+-(void) doLightLevel;
 -(void) doNext;
 -(void) doIndex;
 -(void)showCurrentPage:(int)maxpage;
