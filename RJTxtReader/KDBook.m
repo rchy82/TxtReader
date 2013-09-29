@@ -247,7 +247,7 @@
     if (offsetBeforeUpdatePage == 0) // 第1页具特殊性
         return 1;
     
-	NSUInteger resultIndex = 2; 
+	NSUInteger resultIndex = 1; //fixed from 2;
     unsigned long long offset = 0;
 	
 	offset = [[pageIndexArray objectAtIndex:0] unsignedLongLongValue];
@@ -256,9 +256,32 @@
             resultIndex++;
             offset = [[pageIndexArray objectAtIndex:(resultIndex - 2)] unsignedLongLongValue];            
         } while (offsetBeforeUpdatePage > offset);
+        
+        resultIndex--;
     }
     
     return resultIndex ; //- 1;
+}
+
+- (NSUInteger)pageIndexWithOffset:(unsigned long long)offset
+{
+    if (offset == 0) // 第1页具特殊性
+        return 1;
+    
+	NSUInteger resultIndex = 1; //fixed from 2;
+    unsigned long long offsetTemp = 0;
+	
+	offsetTemp = [[pageIndexArray objectAtIndex:0] unsignedLongLongValue];
+    if (offset > offsetTemp) {
+        do {
+            resultIndex++;
+            offsetTemp = [[pageIndexArray objectAtIndex:(resultIndex - 2)] unsignedLongLongValue];
+        } while (offset > offsetTemp);
+        
+        resultIndex--;
+    }
+    
+    return resultIndex ;    
 }
 
 - (NSString *)minEnoughStringFullfillWholePage

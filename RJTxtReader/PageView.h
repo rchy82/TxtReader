@@ -16,6 +16,7 @@
 }
 @property (nonatomic,retain) NSString *text;
 //@property (retain) NSArray *textColorSets; // 不需要外部访问
+@property (nonatomic) NSUInteger textFontSizeIndex;
 
 -(NSUInteger) changeColor;
 -(void) updateTextColorByIndex:(NSUInteger) index;

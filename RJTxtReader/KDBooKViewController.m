@@ -150,21 +150,38 @@
     NSMutableArray *ChatperArray = nil;
     NSMutableArray *PageNumArray = nil;
     NSMutableArray *BookTimeArray = nil;
+    NSMutableArray *OffsetArray = nil; // 支持字体变换
+    NSMutableArray *fontIndexArray = nil;
     if([[NSFileManager defaultManager] fileExistsAtPath:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_chatper.plist"]]])
     {
         ChatperArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_chatper.plist"]]];
         PageNumArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_pagenum.plist"]]];
         BookTimeArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_booktime.plist"]]];
+        OffsetArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_offset.plist"]]];
+        fontIndexArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_fontindex.plist"]]];
     }
     else{
         ChatperArray = [[[NSMutableArray alloc] initWithCapacity:1] autorelease];
         PageNumArray = [[[NSMutableArray alloc] initWithCapacity:1]  autorelease];
         BookTimeArray = [[[NSMutableArray alloc] initWithCapacity:1] autorelease];
+        OffsetArray = [[[NSMutableArray alloc] initWithCapacity:1] autorelease];
+        fontIndexArray = [[[NSMutableArray alloc] initWithCapacity:1] autorelease];        
     }
-    //判断是否已添加此标签
-    for(NSUInteger i=0;i<[PageNumArray count];i++)
+    //判断是否已添加此标签 -> 支持字体变换 目前只有offset可唯一区分,故改为使用offset判断
+//    for(NSUInteger i=0;i<[PageNumArray count];i++)
+//    {
+//        if([[PageNumArray objectAtIndex:i] integerValue] == pageIndex)
+//        {
+//            UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"view.bookmark.alert.title", nil) message:NSLocalizedString(@"view.bookmark.alert.desc.marked", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"view.bookmark.alert.button.ok", nil) otherButtonTitles:nil];
+//            [alertView show];
+//            [alertView release];
+//            return;
+//        }
+//    }
+    unsigned long long offset = [mBook offsetWithPage:pageIndex];
+    for(NSUInteger i=0;i<[OffsetArray count];i++)
     {
-        if([[PageNumArray objectAtIndex:i] integerValue] == pageIndex)
+        if([[OffsetArray objectAtIndex:i] integerValue] == offset)
         {
             UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"view.bookmark.alert.title", nil) message:NSLocalizedString(@"view.bookmark.alert.desc.marked", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"view.bookmark.alert.button.ok", nil) otherButtonTitles:nil];
             [alertView show];
@@ -172,12 +189,15 @@
             return;
         }
     }
+    
     //添加新的书签
     [PageNumArray addObject:[NSString stringWithFormat:@"%d",pageIndex]];
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
     [fmt setDateFormat:@"yyyy-MM-dd hh:mm a"];
     [BookTimeArray addObject: [fmt stringFromDate:[NSDate date]]];
     [fmt release];
+    [OffsetArray addObject:[NSString stringWithFormat:@"%lld",offset]];
+    [fontIndexArray addObject:[NSString stringWithFormat:@"%d", bookLabel.textFontSizeIndex]];
     //得到当前章节名称
     NSString* chapterName = nil;
     unsigned long long fileOffset = [mBook offsetWithPage:pageIndex];
@@ -200,6 +220,8 @@
     [ChatperArray writeToFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_chatper.plist"]]  atomically:YES];
     [PageNumArray writeToFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_pagenum.plist"]]  atomically:YES];
     [BookTimeArray writeToFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_booktime.plist"]]  atomically:YES];
+    [OffsetArray writeToFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_offset.plist"]] atomically:YES];
+    [fontIndexArray writeToFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_fontindex.plist"]] atomically:YES];
     
     UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"view.bookmark.alert.title", nil) message:NSLocalizedString(@"view.bookmark.alert.desc.marked.ok", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"view.bookmark.alert.button.ok", nil) otherButtonTitles:nil];
     [alertView show];
@@ -234,6 +256,7 @@
     [leftBarButtonItem release];
         
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bookmark.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(doBookmark)];
+    rightItem.enabled = NO; // 目前书签添加基于offset记录, 所以需要监测分页的完成状态. 直到分页完成才打开
     self.navigationItem.rightBarButtonItem = rightItem;
     [rightItem release];
     
@@ -434,6 +457,7 @@
         // 更新控件
         [self.navigationController.toolbar.items[0] setEnabled:NO];
         [self.navigationController.toolbar.items[6] setEnabled:NO];
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
         
         NSUInteger resultFontSizeIndex = [bookLabel changeFontSize];
         NSUserDefaults *saveDefault = [NSUserDefaults standardUserDefaults];
@@ -501,6 +525,14 @@
         [self exchangeAnimate:0];
         [self savePlace:pageIndex];
         return ;
+    }
+}
+- (void)gotoPageWithOffset:(unsigned long long) offset page:(NSUInteger) gotoPageNum fontindex:(NSUInteger) index; // 支持字体变换
+{
+    if (index == bookLabel.textFontSizeIndex) {
+        [self gotoPage:gotoPageNum];
+    } else {
+        [self gotoPage:[mBook pageIndexWithOffset:offset]];
     }
 }
 - (void)gotoChapter:(NSUInteger) gotoChapterNum
@@ -619,6 +651,7 @@
     // 更新控件
     [self.navigationController.toolbar.items[0] setEnabled:YES];
     [self.navigationController.toolbar.items[6] setEnabled:YES];
+    [self.navigationItem.rightBarButtonItem setEnabled:YES];
 }
 
 - (void)updatePageStringBeforeUpdate:(NSString *) pageString

@@ -23,4 +23,4 @@
 "nav.book.index" = "目录";
 "nav.bookmarks" = "书签";
 "bookmarks.added.time" = "书签时间：";
-"bookmarks.page.on" = "第%@页  ";
+"bookmarks.page.on" = "位置: %@  ";

@@ -12,6 +12,7 @@
 @protocol BookReadDelegate
 
 - (void)gotoPage:(NSUInteger) gotoPageNum;
+- (void)gotoPageWithOffset:(unsigned long long) offset page:(NSUInteger) gotoPageNum fontindex:(NSUInteger) index; // 支持字体变换
 - (void)gotoChapter:(NSUInteger) gotoChapterNum;
 - (void)willBack;
 

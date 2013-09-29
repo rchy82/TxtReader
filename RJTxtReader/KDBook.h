@@ -62,5 +62,6 @@ typedef enum {
 - (NSUInteger)pageIndexAfterUpdatePage;
 //- (NSString *)minEnoughStringFullfillWholePage:(NSUInteger) pageIndex indexArray:(NSMutableArray *) array;
 - (NSString *)minEnoughStringFullfillWholePage;
+- (NSUInteger)pageIndexWithOffset:(unsigned long long)offset;
 
 @end

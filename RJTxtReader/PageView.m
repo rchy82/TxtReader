@@ -7,6 +7,7 @@
 @implementation PageView
 @synthesize text;
 //@synthesize textColorSets; // 不需要外部访问
+@synthesize textFontSizeIndex;
 
 - (id)initWithFrame:(CGRect)frame {
     

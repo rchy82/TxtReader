@@ -157,17 +157,19 @@
         NSMutableArray *ChatperArray = nil;
         NSMutableArray *PageNumArray = nil;
         NSMutableArray *BookTimeArray = nil;
+        NSMutableArray *OffsetArray = nil; // 支持字体变换
         if([[NSFileManager defaultManager] fileExistsAtPath:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_pagenum.plist"]]])
         {
             ChatperArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_chatper.plist"]]];
             PageNumArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_pagenum.plist"]]];
             BookTimeArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_booktime.plist"]]];
+            OffsetArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_offset.plist"]]];
         }
         NSString *text = [[ChatperArray objectAtIndex:indexPath.row] substringFromIndex:9];
         cell.textLabel.text = [text substringWithRange:NSMakeRange(0, text.length-4)];
         
         NSString *booktime = NSLocalizedString(@"bookmarks.added.time", nil);
-        NSString *detailText = [NSString stringWithFormat:NSLocalizedString(@"bookmarks.page.on", nil),[PageNumArray objectAtIndex:indexPath.row]];
+        NSString *detailText = [NSString stringWithFormat:NSLocalizedString(@"bookmarks.page.on", nil),[OffsetArray objectAtIndex:indexPath.row]]; // PageNumArray -> OffsetArray
         cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
         cell.detailTextLabel.text = [detailText stringByAppendingString:[booktime stringByAppendingString:[BookTimeArray objectAtIndex:indexPath.row]]];
         
@@ -192,11 +194,15 @@
     NSMutableArray *ChatperArray = nil;
     NSMutableArray *PageNumArray = nil;
     NSMutableArray *BookTimeArray = nil;
+    NSMutableArray *OffsetArray = nil; // 支持字体变换
+    NSMutableArray *fontIndexArray = nil;
     if([[NSFileManager defaultManager] fileExistsAtPath:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_pagenum.plist"]]])
     {
         ChatperArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_chatper.plist"]]];
         PageNumArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_pagenum.plist"]]];
         BookTimeArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_booktime.plist"]]];
+        OffsetArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_offset.plist"]]];
+        fontIndexArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_fontindex.plist"]]];
     }
     else {
         return;
@@ -205,10 +211,14 @@
     [ChatperArray removeObjectAtIndex:delButton.tag];
     [PageNumArray removeObjectAtIndex:delButton.tag];
     [BookTimeArray removeObjectAtIndex:delButton.tag];
+    [OffsetArray removeObjectAtIndex:delButton.tag];
+    [fontIndexArray removeObjectAtIndex:delButton.tag];
     //保存书签
     [ChatperArray writeToFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_chatper.plist"]]  atomically:YES];
     [PageNumArray writeToFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_pagenum.plist"]]  atomically:YES];
     [BookTimeArray writeToFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_booktime.plist"]]  atomically:YES];
+    [OffsetArray writeToFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_offset.plist"]] atomically:YES];
+    [fontIndexArray writeToFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_fontindex.plist"]] atomically:YES];
     //刷新tableview
     [bookmarkTableView reloadData];
 }
@@ -223,16 +233,23 @@
     else {
         RJSingleBook* singleBook = [[RJBookData sharedRJBookData].books objectAtIndex:bookIndex];
         NSString *Path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSMutableArray *ChatperArray = nil;
+        //NSMutableArray *ChatperArray = nil; // 本方法并未使用此数组
         NSMutableArray *PageNumArray = nil;
-        NSMutableArray *BookTimeArray = nil;
+        //NSMutableArray *BookTimeArray = nil; // 本方法并未使用此数组
+        NSMutableArray *OffsetArray = nil; // 支持字体变换
+        NSMutableArray *fontIndexArray = nil;
         if([[NSFileManager defaultManager] fileExistsAtPath:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_pagenum.plist"]]])
         {
-            ChatperArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_chatper.plist"]]];
+            //ChatperArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_chatper.plist"]]];
             PageNumArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_pagenum.plist"]]];
-            BookTimeArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_booktime.plist"]]];
+            //BookTimeArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_booktime.plist"]]];
+            OffsetArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_offset.plist"]]];
+            fontIndexArray = [NSMutableArray arrayWithContentsOfFile:[Path stringByAppendingPathComponent:[singleBook.name stringByAppendingString:@"_fontindex.plist"]]];
         }
-        [delegate gotoPage:[[PageNumArray objectAtIndex:indexPath.row] integerValue]];
+        //[delegate gotoPage:[[PageNumArray objectAtIndex:indexPath.row] integerValue]];
+        [delegate gotoPageWithOffset:[[OffsetArray objectAtIndex:indexPath.row] integerValue]
+                                page:[[PageNumArray objectAtIndex:indexPath.row] integerValue]
+                           fontindex:[[fontIndexArray objectAtIndex:indexPath.row] integerValue]];
     }
     [self back:self];
 }

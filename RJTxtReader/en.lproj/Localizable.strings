@@ -23,4 +23,4 @@
 "nav.book.index" = "Index";
 "nav.bookmarks" = "Bookmarks";
 "bookmarks.added.time" = "Added on：";
-"bookmarks.page.on" = "Page %@  ";
+"bookmarks.page.on" = "Position: %@  ";
